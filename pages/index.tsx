@@ -55,7 +55,7 @@ function Index(props) {
   }, [windowSize, mousePosition])
 
   React.useEffect(() => {
-    console.log(vector)
+    // console.log(vector)
   }, [vector])
 
   return (
