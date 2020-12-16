@@ -65,17 +65,17 @@ export const Comet = ({
 
           &:after {
             content: '';
-            top: -40%;
+            top: -50%;
             left: 0;
             position: absolute;
             display: block;
             width: 100%;
-            height: 180%;
+            height: 200%;
             background: linear-gradient(to bottom, #f2ead1, #68649d);
             background-size: 100% 200%;
             clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
             border-radius: 100%;
-            transform: scale3d(1, 0.5555, 1);
+            transform: scale3d(1, 0.5, 1);
             transition: all var(--transition-time) ease-in-out;
           }
         }
@@ -83,8 +83,8 @@ export const Comet = ({
       <style jsx>{`
         .comet {
           /* transform: scale3d(1 - 0.75, 1, 1); */
-          transform: scale3d(${mix(1, 0.6, easeInOutQuad(speed))}, 1, 1)
-            rotate(${direction - 90}deg);
+          transform: rotate(${direction - 90}deg)
+            scale3d(${mix(1, 0.7, easeInOutQuad(speed))}, 1, 1);
 
           &:before,
           &:after {
@@ -94,7 +94,7 @@ export const Comet = ({
 
           &:before {
             /* transform: scale3d(1, 0.5555-1, 1); */
-            transform: scale3d(1, ${mix(1, 1.1, easeInOutQuad(speed))}, 1);
+            transform: scale3d(1, ${mix(1, 1.2, easeInOutQuad(speed))}, 1);
           }
 
           &:after {
