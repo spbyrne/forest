@@ -21,11 +21,11 @@ export const Comet = ({
 
   return (
     <>
-      <div className="blobWrapper">
-        <span className="blob"></span>
+      <div className="cometWrapper">
+        <span className="comet"></span>
       </div>
       <style jsx>{`
-        .blobWrapper {
+        .cometWrapper {
           --transition-time: 0ms;
 
           display: block;
@@ -34,7 +34,7 @@ export const Comet = ({
           overflow: visible;
         }
 
-        .blob {
+        .comet {
           top: 0;
           left: 0;
           display: block;
@@ -81,7 +81,7 @@ export const Comet = ({
         }
       `}</style>
       <style jsx>{`
-        .blob {
+        .comet {
           /* transform: scale3d(1 - 0.75, 1, 1); */
           transform: scale3d(${mix(1, 0.6, easeInOutQuad(speed))}, 1, 1)
             rotate(${direction - 90}deg);
