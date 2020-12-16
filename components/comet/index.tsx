@@ -94,12 +94,12 @@ export const Comet = ({
 
           &:before {
             /* transform: scale3d(1, 0.5555-1, 1); */
-            transform: scale3d(1, ${mix(1, 1.2, easeInOutQuad(speed))}, 1);
+            transform: scale3d(1, ${mix(1, 1.1, easeInOutQuad(speed))}, 1);
           }
 
           &:after {
             /* transform: scale3d(1, 0.5555-1, 1); */
-            transform: scale3d(1, ${mix(0.5555, 2, easeInOutQuad(speed))}, 1);
+            transform: scale3d(1, ${mix(0.5555, 1.5, easeInOutQuad(speed))}, 1);
           }
         }
       `}</style>
