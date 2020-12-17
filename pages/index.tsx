@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { Scene, Comet } from '../components'
+import { Scene, Comet, Starfield } from '../components'
 
 function Index(props) {
   const [mousePosition, setMousePosition] = React.useState({ x: null, y: null })
@@ -12,14 +12,14 @@ function Index(props) {
 
   const updateMousePosition = _.throttle(ev => {
     setMousePosition({ x: ev.clientX, y: ev.clientY })
-  }, 10)
+  }, 8)
 
   const updateWindowSize = _.throttle(() => {
     setWindowSize({
       width: window.innerWidth,
       height: window.innerHeight,
     })
-  }, 10)
+  }, 8)
 
   const updateVector = _.throttle(() => {
     const midpoint = { x: windowSize.width / 2, y: windowSize.height / 2 }
@@ -36,7 +36,7 @@ function Index(props) {
     const speed = Math.round(Math.max(speedX, speedY) * 100) / 100
 
     setVector({ speed, direction })
-  }, 10)
+  }, 8)
 
   React.useEffect(() => {
     window.addEventListener('mousemove', updateMousePosition)
@@ -59,9 +59,10 @@ function Index(props) {
   }, [vector])
 
   return (
-    <Scene vector={vector}>
+    <>
       <Comet vector={vector} />
-    </Scene>
+      <Starfield vector={vector} />
+    </>
   )
 }
 

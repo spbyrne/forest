@@ -1,4 +1,5 @@
 import React from 'react'
+import { mix, easeInOutQuad } from '@/util'
 
 export interface CometProps {
   vector: { speed: number; direction: number }
@@ -32,7 +33,11 @@ export const Comet = ({
           --transition-time: 0ms;
 
           display: block;
-          position: relative;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate3d(-75px, -30px, 0);
+          z-index: 10;
           width: 150px;
           overflow: visible;
         }
@@ -174,11 +179,3 @@ export const Comet = ({
     </>
   )
 }
-
-const mix = (stationary, moving, mix) => {
-  const difference = moving - stationary
-  const current = stationary + difference * mix
-  return current
-}
-
-const easeInOutQuad = t => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t)
