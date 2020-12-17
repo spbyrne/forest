@@ -10,6 +10,8 @@ export const GlobalStyles = () => {
         html {
           box-sizing: border-box;
           height: 100%;
+          width: 100%;
+          overflow: hidden;
         }
 
         *,

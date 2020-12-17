@@ -56,7 +56,7 @@ export const Star = ({ vector }) => {
           opacity: 0.7;
           background: linear-gradient(
             to top,
-            rgba(255, 255, 255, 1),
+            #ebeaf5,
             rgba(255, 255, 255, 0.2)
           );
           background-size: 100%;
@@ -109,22 +109,6 @@ export const Starfield = ({ vector }) => {
   return (
     <>
       <div className="starfield">
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
-        <Star vector={vector} />
         <Star vector={vector} />
         <Star vector={vector} />
         <Star vector={vector} />
