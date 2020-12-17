@@ -69,7 +69,7 @@ export const Star = ({ vector }) => {
   )
 }
 
-export const Starfield = ({ vector, children }) => {
+export const Starfield = ({ vector }) => {
   const { speed, direction } = vector
   const [cursor, setCursor] = React.useState('none')
 

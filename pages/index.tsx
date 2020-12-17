@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { Scene, Comet, Starfield } from '../components'
+import { Comet, Starfield } from '../components'
 
 function Index(props) {
   const [mousePosition, setMousePosition] = React.useState({ x: null, y: null })
