@@ -19,7 +19,6 @@ function Index(props) {
           width: 100%;
           height: 100%;
           top: 0;
-          opacity: 1;
         }
       `}</style>
     </>
