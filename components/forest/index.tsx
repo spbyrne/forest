@@ -1,16 +1,16 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { bias, mix, easeInSin, easeInQuad, easeOutQuad } from '@/util'
+import { bias, mix, easeInSin, easeInOutQuad, easeOutQuad } from '@/util'
 import { Tree } from 'components/tree'
 
 export const Forest = ({}) => {
   const generateTree = () => {
-    let offsetTop = Math.random()
+    let offsetTop = mix(0.3, 0.7, Math.random())
     let top = Math.round(mix(0.3, 1, offsetTop) * 1000) / 10 + `%`
     top = `30%`
     let left = Math.round(Math.random() * 1000) / 10 + `%`
     let zIndex =
-      Math.round(mix(0, 50, easeInSin(offsetTop)) * 1000) / 1000 + 'px'
+      Math.round(mix(0, 55, easeInOutQuad(offsetTop)) * 1000) / 1000 + 'px'
     let blur = Math.round(mix(0, 15, offsetTop - 0.5) * 100) / 100 + `px`
     let depth = Math.round((1 - easeOutQuad(offsetTop)) * 100) / 100
 
@@ -36,7 +36,7 @@ export const Forest = ({}) => {
   }
 
   const trees = React.useMemo(() => {
-    return generateTrees(150)
+    return generateTrees(100)
   }, [])
 
   return (
