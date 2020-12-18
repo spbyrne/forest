@@ -14,6 +14,7 @@ export const GlobalStyles = () => {
           width: 100%;
           overflow: hidden;
           transform-style: preserve-3d;
+          background: black;
         }
 
         *,
