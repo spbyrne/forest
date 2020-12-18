@@ -49,14 +49,16 @@ export const Tree = ({
             content: '';
             display: block;
             position: absolute;
-            bottom: 0;
-            width: calc(var(--crown-height) * 1.5);
-            height: calc(var(--crown-width) / 2.5);
-            transform: translate3d(-10%, 66%, 0);
+            bottom: calc(var(--trunk-height) * -0.5);
+            left: calc(var(--trunk-height) * 0.3);
+            width: var(--crown-width);
+            height: calc(var(--crown-width) * 0.3);
+            transform: translate3d(0, 0, 0);
             border-radius: 100%;
             background: hsla(274, 62, 17, 0.2);
             filter: blur(10px);
             opacity: calc(1 - ${easeOutQuad(depth)});
+            opacity: 1;
           }
 
           /* Trunk Shadow */
@@ -64,19 +66,20 @@ export const Tree = ({
             content: '';
             display: block;
             position: absolute;
-            bottom: calc(var(--trunk-height) * 0.1);
-            left: calc(var(--trunk-width) * -0.5);
-            transform: translate3d(0, 100%, 0) rotate(-40deg);
-            width: calc(var(--trunk-width) * 2);
-            clip-path: polygon(0% 0%, 30% 0%, 100% 100%, 60% 100%);
+            bottom: 0;
+            left: 0;
+            transform: translate3d(0, 100%, 0) rotate(-80deg);
+            width: var(--trunk-width);
             height: var(--trunk-height);
             transform-origin: 0 0;
             z-index: -1;
             background: linear-gradient(
-              to bottom,
-              hsla(310, 62%, 17%, 0.4),
+              to right,
+              hsla(310, 62%, 17%, 0.7),
+              hsla(310, 62%, 17%, 0.3),
               transparent
             );
+            mask-image: linear-gradient(to bottom, white, transparent);
           }
         }
 
@@ -91,7 +94,8 @@ export const Tree = ({
             `%, ` +
             mix(39, 85, easeOutQuad(depth)) +
             `%)`};
-          box-shadow: inset -0.5rem calc(var(--crown-height) / 2 + 0.5rem) 1rem ${`hsla(310, 62%, 17%, ` + (1 - easeOutQuad(depth)) + `)`};
+          box-shadow: inset -0.75rem calc(var(--crown-height) / 2 + 0.5rem) 1rem
+            ${`hsla(310, 62%, 17%, ` + (1 - easeOutQuad(depth)) + `)`};
           bottom: 0;
           left: 0;
           transform: translate3d(-50%, 0, 0);
@@ -104,7 +108,7 @@ export const Tree = ({
             `%, ` +
             mix(30, 85, easeOutQuad(depth)) +
             `%)`};
-          box-shadow: inset -1rem -1rem 2rem
+          box-shadow: inset -1rem -1.5rem 2rem
             ${`hsla(176, 66%, 22%, ` + (1 - easeOutQuad(depth)) + `)`};
           width: var(--crown-width);
           height: var(--crown-height);
