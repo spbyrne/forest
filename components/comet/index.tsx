@@ -30,13 +30,11 @@ export const Comet = ({
       </div>
       <style jsx>{`
         .cometWrapper {
-          --transition-time: 0ms;
-
           display: block;
           position: absolute;
           top: 50%;
           left: 50%;
-          transform: translate3d(-75px, -30px, 0);
+          transform: translate3d(-75px, -75px, 0);
           z-index: 10;
           width: 150px;
           overflow: visible;
@@ -50,7 +48,6 @@ export const Comet = ({
           padding-bottom: 100%;
           height: 0;
           overflow: visible;
-          transition: all var(--transition-time) ease-in-out;
           filter: drop-shadow(0 0 48px #433f7d);
         }
 
@@ -107,7 +104,6 @@ export const Comet = ({
           height: 100%;
           opacity: 0.8;
           overflow: visible;
-          transition: all var(--transition-time) ease-in-out;
 
           &:before {
             content: '';
@@ -122,7 +118,6 @@ export const Comet = ({
             clip-path: polygon(0 00%, 100% 0%, 100% 50%, 0 50%);
             border-radius: 100%;
             transform: scale3d(1, 1, 1);
-            transition: all var(--transition-time) ease-in-out;
             box-shadow: inset 0 4.5rem 2rem -3rem #f5d45d;
             z-index: 10;
           }
@@ -140,7 +135,6 @@ export const Comet = ({
             clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
             border-radius: 100%;
             transform: scale3d(1, 0.5, 1);
-            transition: all var(--transition-time) ease-in-out;
             z-index: 10;
             mask-image: linear-gradient(to top, transparent, black 40%);
           }
@@ -149,10 +143,12 @@ export const Comet = ({
       <style jsx>{`
         .comet {
           transform: rotate(${direction - 90}deg)
-            scale3d(${mix(1, 0.7, easeInOutQuad(speed))}, 1, 1);
+            scale3d(${mix(1, 0.8, easeInOutQuad(speed))}, 1, 1);
         }
 
         .tail {
+          opacity: ${mix(0, 0.7, easeInOutQuad(speed))};
+
           &:before,
           &:after {
             background-size: 100% ${mix(200, 100, easeInOutQuad(speed)) + `%`};
@@ -163,17 +159,16 @@ export const Comet = ({
           }
 
           &:after {
-            transform: scale3d(1, ${mix(0.5555, 1.5, easeInOutQuad(speed))}, 1);
+            transform: scale3d(1, ${mix(0.5555, 2.5, easeInOutQuad(speed))}, 1);
           }
         }
 
         .nucleus {
           transform: translate3d(
-              0,
-              ${mix(0, -10, easeInOutQuad(speed)) + `px`},
-              0
-            )
-            rotate(${-1 * direction - 90}deg);
+            0,
+            ${mix(0, -10, easeInOutQuad(speed)) + `px`},
+            0
+          );
         }
       `}</style>
     </>

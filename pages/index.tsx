@@ -1,27 +1,33 @@
 import * as React from 'react'
 import * as _ from 'underscore'
+import { useInterval } from '@/util'
 import { Comet, Starfield } from '../components'
 
 function Index(props) {
+  const animationTiming = 50
   const [mousePosition, setMousePosition] = React.useState({ x: null, y: null })
   const [windowSize, setWindowSize] = React.useState({
     width: undefined,
     height: undefined,
   })
+  const [targetVector, setTargetVector] = React.useState({
+    speed: 0,
+    direction: 0,
+  })
   const [vector, setVector] = React.useState({ speed: 0, direction: 0 })
 
   const updateMousePosition = _.throttle(ev => {
-    setMousePosition({ x: ev.clientX, y: ev.clientY })
-  }, 8)
+    setMousePosition({ x: Math.round(ev.clientX), y: Math.round(ev.clientY) })
+  }, animationTiming)
 
   const updateWindowSize = _.throttle(() => {
     setWindowSize({
       width: window.innerWidth,
       height: window.innerHeight,
     })
-  }, 8)
+  }, 100)
 
-  const updateVector = _.throttle(() => {
+  const updateTargetVector = _.throttle(() => {
     const midpoint = { x: windowSize.width / 2, y: windowSize.height / 2 }
 
     const direction = Math.round(
@@ -35,8 +41,20 @@ function Index(props) {
     const speedY = Math.abs(mousePosition.y - midpoint.y) / midpoint.y
     const speed = Math.round(Math.max(speedX, speedY) * 100) / 100
 
+    setTargetVector({ speed, direction })
+  }, animationTiming)
+
+  const animationFrame = () => {
+    if (vector == targetVector) return
+
+    let deltaSpeed = Math.round((targetVector.speed - vector.speed) * 100) / 100
+    let deltaDirection = targetVector.direction - vector.direction
+
+    let speed = vector.speed + deltaSpeed / 8
+    let direction = vector.direction + deltaDirection / 8
+
     setVector({ speed, direction })
-  }, 8)
+  }
 
   React.useEffect(() => {
     window.addEventListener('mousemove', updateMousePosition)
@@ -50,18 +68,15 @@ function Index(props) {
     }
   }, [])
 
-  React.useEffect(() => {
-    updateVector()
-  }, [windowSize, mousePosition])
-
-  React.useEffect(() => {
-    // console.log(vector)
-  }, [vector])
+  useInterval(() => {
+    animationFrame()
+    updateTargetVector()
+  }, animationTiming)
 
   return (
     <>
       <Comet vector={vector} />
-      <Starfield vector={vector} />
+      <Starfield windowSize={windowSize} vector={vector} />
     </>
   )
 }
