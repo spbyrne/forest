@@ -3,7 +3,7 @@ import * as _ from 'underscore'
 import { mix, easeOutQuad, randomFromArray } from '@/util'
 import { Tree, Rock } from 'components'
 
-export const Forest = ({ numberOfObjects = 200 }) => {
+export const Forest = ({ numberOfObjects = 175 }) => {
   const [output, setOutput] = React.useState(null)
   const objectOptions = [Tree, Tree, Tree, Rock]
 
