@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { mix, easeOutQuad, easeInQuad, easeInSin } from '@/util'
+import { mix, easeOutQuad, easeInQuad, easeInSin, easeOutExpo } from '@/util'
 
 export const Tree = ({
   position = { top: '50%', left: '50%', zIndex: 50 },
@@ -38,7 +38,7 @@ export const Tree = ({
 
           position: absolute;
           transform: translate3d(0, 30vh, ${position.zIndex})
-            scale3d(0.2, 0.2, 1);
+            scale3d(0.4, 0.4, 1);
           transform-origin: 50% 100%;
           top: 0%;
           left: ${position.left};
@@ -58,7 +58,7 @@ export const Tree = ({
             background: hsla(274, 62, 17, 0.2);
             filter: blur(10px);
             opacity: calc(1 - ${easeOutQuad(depth)});
-            opacity: 1;
+            opacity: ${1 - easeOutQuad(depth)};
           }
 
           /* Trunk Shadow */
@@ -73,6 +73,7 @@ export const Tree = ({
             height: var(--trunk-height);
             transform-origin: 0 0;
             z-index: -1;
+            filter: blur(1px);
             background: linear-gradient(
               to right,
               hsla(310, 62%, 17%, 0.7),
@@ -80,6 +81,7 @@ export const Tree = ({
               transparent
             );
             mask-image: linear-gradient(to bottom, white, transparent);
+            opacity: ${1 - easeOutQuad(depth)};
           }
         }
 
@@ -104,9 +106,9 @@ export const Tree = ({
         .crown {
           position: absolute;
           background: ${`hsl(88, ` +
-            mix(60, 20, easeOutQuad(depth)) +
+            mix(60, 20, depth) +
             `%, ` +
-            mix(30, 85, easeOutQuad(depth)) +
+            mix(30, 80, depth) +
             `%)`};
           box-shadow: inset -1rem -1.5rem 2rem
             ${`hsla(176, 66%, 22%, ` + (1 - easeOutQuad(depth)) + `)`};

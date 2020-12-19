@@ -1,21 +1,21 @@
 import * as React from 'react'
-import * as _ from 'underscore'
-import { useInterval } from '@/util'
-import { Forest } from '../components'
+import { Forest, Scene } from '../components'
 
 function Index(props) {
   return (
     <>
-      <div className="scene">
-        <Forest />
+      <div className="camera">
+        <Scene>
+          <Forest />
+        </Scene>
       </div>
       <style>{`
-        .scene {
+        .camera {
           display: block;
+          position: absolute;
           perspective: 50px;
           perspective-origin: 50% 28%;
           transform-style: preserve-3d;
-          position: absolute;
           width: 100%;
           height: 100%;
           top: 0;
