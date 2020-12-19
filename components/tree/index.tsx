@@ -90,7 +90,7 @@ export const Tree = ({
           background: ${`hsl(22, ` +
             mix(53, 20, easeOutQuad(depth)) +
             `%, ` +
-            mix(20, 73, easeOutQuad(depth)) +
+            mix(16, 73, easeOutQuad(depth)) +
             `%)`};
           box-shadow: inset -0.75rem calc(var(--crown-height) / 2 + 0.5rem) 1rem
             ${`hsla(310, 62%, ` +
@@ -101,7 +101,6 @@ export const Tree = ({
           bottom: 0;
           left: 0;
           transform: translate3d(-50%, 0, 0);
-          filter: blur(var(--blur));
         }
 
         .crown {
@@ -120,7 +119,6 @@ export const Tree = ({
           bottom: var(--trunk-height);
           border-radius: 100%;
           transform: translate3d(-50%, 0, 0);
-          filter: blur(var(--blur));
         }
       `}</style>
     </>
