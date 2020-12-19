@@ -15,7 +15,7 @@ function Index(props) {
           display: block;
           position: absolute;
           perspective: 500px;
-          perspective-origin: 50% 28%;
+          perspective-origin: 50% 27%;
           transform-style: preserve-3d;
           width: 100%;
           height: 100%;

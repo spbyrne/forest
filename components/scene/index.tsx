@@ -12,19 +12,19 @@ export const Scene = ({ children }) => {
       <style>{`
         @keyframes slide {
           0% {
-            transform: translate3d(-300px, 0, 0);
-          }
-          25% {
-            transform: translate3d(-300px, 180px, -300px);
-          }
-          50% {
-            transform: translate3d(300px, 180px, -300px);
-          }
-         75% {
             transform: translate3d(300px, 0, 0);
           }
-          100% {
+          25% {
             transform: translate3d(-300px, 0, 0);
+          }
+          50% {
+            transform: translate3d(-300px, 180px, -300px);
+          }
+          75% {
+            transform: translate3d(300px, 180px, -300px);
+          }
+          100% {
+            transform: translate3d(300px, 0, 0);
           }
         }
         
@@ -43,6 +43,8 @@ export const Scene = ({ children }) => {
           animation-duration: 30s;
           animation-timing-function: cubic-bezier(0.420, 0.000, 0.580, 1.000);
           animation-iteration-count: infinite;
+          animation-fill-mode: both;
+          animation-delay: 1s;
         }
 
         .sun {
