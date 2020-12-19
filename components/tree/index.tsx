@@ -44,12 +44,11 @@ export const Tree = ({
           --depth: ${depth};
 
           position: absolute;
-          transform: translate3d(0, 30vh, ${position.zIndex})
-            scale3d(0.4, 0.4, 1);
+          transform: translate3d(0, 0, ${position.zIndex}) scale3d(0.4, 0.4, 1);
           transform-origin: 50% 100%;
+          top: 32%;
           left: ${position.left};
           transform-style: preserve-3d;
-          filter: blur(var(--blur));
 
           /* Shadow */
           &:before {
@@ -60,7 +59,7 @@ export const Tree = ({
             bottom: 0;
             left: 0;
             width: var(--crown-width);
-            height: calc(var(--crown-height) / 10);
+            height: calc(var(--crown-height) / 4);
             transform: translate3d(-50%, 0, 0) rotate3d(-1, 0, 0, 90deg);
             border-radius: 100%;
             background: radial-gradient(
@@ -75,11 +74,19 @@ export const Tree = ({
         }
 
         .trunk {
+          --clip-offset: calc(100% - 2px);
+
           position: absolute;
           display: block;
           width: var(--trunk-width);
           height: calc(var(--trunk-height) + calc(var(--crown-height) / 2));
-          clip-path: polygon(10% 0%, 90% 0%, 100% 97%, 50% 100%, 0% 97%);
+          clip-path: polygon(
+            10% 0%,
+            90% 0%,
+            100% var(--clip-offset),
+            50% 100%,
+            0% var(--clip-offset)
+          );
           background: ${`hsl(22, ` +
             mix(53, 20, easeOutQuad(depth)) +
             `%, ` +
@@ -94,6 +101,7 @@ export const Tree = ({
           bottom: 0;
           left: 0;
           transform: translate3d(-50%, 0, 0);
+          filter: blur(var(--blur));
         }
 
         .crown {
@@ -101,21 +109,23 @@ export const Tree = ({
           background: ${`hsl(` +
             mix(100, 80, depth) +
             `, ` +
-            mix(60, 20, depth) +
+            mix(56, 20, depth) +
             `%, ` +
             mix(18, 76, easeOutQuad(depth)) +
             `%)`};
           box-shadow: inset -1rem -1.5rem 2rem
-            ${`hsla(176, 66%, ` +
-              mix(14, 24, depth) +
-              `%, ` +
-              (1 - easeOutQuad(depth)) +
-              `)`};
+              ${`hsla(176, 66%, ` +
+                mix(14, 24, depth) +
+                `%, ` +
+                (1 - easeOutQuad(depth)) +
+                `)`},
+            inset 1rem 1.5rem 5rem -2rem ${`hsla(58, 66%, 93%, ` + (1 - easeOutQuad(depth)) + `)`};
           width: var(--crown-width);
           height: var(--crown-height);
           bottom: var(--trunk-height);
           border-radius: 100%;
           transform: translate3d(-50%, 0, 0);
+          filter: blur(var(--blur));
         }
       `}</style>
     </>
