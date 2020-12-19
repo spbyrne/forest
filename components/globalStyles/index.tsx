@@ -5,16 +5,16 @@ export const GlobalStyles = () => {
         #__next {
           width: 100%;
           height: 100%;
-          transform-style: preserve-3d;
-          overflow: hidden;
         }
 
         html {
           box-sizing: border-box;
+          position: fixed;
+          top: 0;
+          left: 0;
           height: 100%;
           width: 100%;
           overflow: hidden;
-          transform-style: preserve-3d;
           background: linear-gradient(
             to bottom,
             hsl(197, 84%, 70%),
