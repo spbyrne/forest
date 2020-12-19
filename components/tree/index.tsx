@@ -111,7 +111,7 @@ export const Tree = ({ depth, zIndex, left }) => {
           );
           bottom: 0;
           left: 0;
-          transform: translate3d(-50%, 0, 0);
+          transform: translate3d(-50%, 0, -1px);
           backface-visibility: hidden;
         }
 
@@ -121,7 +121,7 @@ export const Tree = ({ depth, zIndex, left }) => {
           height: var(--crown-height);
           bottom: var(--trunk-height);
           border-radius: 100%;
-          transform: translate3d(-50%, 0, 0);
+          transform: translate3d(-50%, 0, 1px);
           backface-visibility: hidden;
         }
 
