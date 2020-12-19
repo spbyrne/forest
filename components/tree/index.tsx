@@ -90,7 +90,7 @@ export const Tree = ({
           background: ${`hsl(22, ` +
             mix(53, 20, easeOutQuad(depth)) +
             `%, ` +
-            mix(20, 75, easeOutQuad(depth)) +
+            mix(20, 73, easeOutQuad(depth)) +
             `%)`};
           box-shadow: inset -0.75rem calc(var(--crown-height) / 2 + 0.5rem) 1rem
             ${`hsla(310, 62%, ` +
@@ -111,15 +111,10 @@ export const Tree = ({
             `, ` +
             mix(56, 20, depth) +
             `%, ` +
-            mix(18, 76, easeOutQuad(depth)) +
+            mix(12, 74, easeOutQuad(depth)) +
             `%)`};
-          box-shadow: inset -1rem -1.5rem 2rem
-              ${`hsla(176, 66%, ` +
-                mix(14, 24, depth) +
-                `%, ` +
-                (1 - easeOutQuad(depth)) +
-                `)`},
-            inset 1rem 1.5rem 5rem -2rem ${`hsla(58, 66%, 93%, ` + (1 - easeOutQuad(depth)) + `)`};
+          box-shadow: inset 0 -1.5rem 2rem ${`hsla(176, 66%, ` + mix(14, 24, depth) + `%, ` + (1 - easeOutQuad(depth)) + `)`},
+            inset 0 1.5rem 5rem -2rem ${`hsla(58, 66%, 93%, ` + easeOutQuad(depth - 0.2) + `)`};
           width: var(--crown-width);
           height: var(--crown-height);
           bottom: var(--trunk-height);

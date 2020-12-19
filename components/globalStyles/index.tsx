@@ -15,7 +15,12 @@ export const GlobalStyles = () => {
           width: 100%;
           overflow: hidden;
           transform-style: preserve-3d;
-          background: black;
+          background: linear-gradient(
+            to bottom,
+            hsl(197, 84%, 70%),
+            hsl(197, 64%, 78%) 40%,
+            hsl(197, 64%, 88%) 80%
+          );
           font-size: 16px;
           overflow: hidden;
         }

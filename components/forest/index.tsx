@@ -11,12 +11,12 @@ import {
 } from '@/util'
 import { Tree } from 'components/tree'
 
-export const Forest = ({ numberOfTrees = 50 }) => {
+export const Forest = ({ numberOfTrees = 200 }) => {
   const generateTree = () => {
     let offsetTop = Math.random()
-    let left = Math.round(Math.random() * 1000) / 10 + `%`
+    let left = Math.round(mix(-0.3, 1.3, Math.random()) * 1000) / 10 + `%`
     let zIndex =
-      Math.round(mix(0, 300, easeInOutQuad(offsetTop)) * 1000) / 1000 + 'px'
+      Math.round(mix(0, 500, easeInOutQuad(offsetTop)) * 1000) / 1000 + 'px'
     let blur = Math.round(mix(0, 5, easeInExpo(offsetTop))) + `px`
     let depth = Math.round((1 - easeOutQuad(offsetTop)) * 100) / 100
 
