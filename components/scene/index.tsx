@@ -14,10 +14,13 @@ export const Scene = ({ children }) => {
           0% {
             transform: translate3d(-300px, 0, 0);
           }
-          33% {
-            transform: translate3d(0, 200px, -300px);
+          25% {
+            transform: translate3d(-300px, 180px, -300px);
           }
-          66% {
+          50% {
+            transform: translate3d(300px, 180px, -300px);
+          }
+         75% {
             transform: translate3d(300px, 0, 0);
           }
           100% {
@@ -36,7 +39,7 @@ export const Scene = ({ children }) => {
           overflow: visible;
           backface-visibility: hidden;
           animation-name: slide;
-          animation-duration: 20s;
+          animation-duration: 30s;
           animation-timing-function: cubic-bezier(0.420, 0.000, 0.580, 1.000);
           animation-iteration-count: infinite;
         }
@@ -60,7 +63,7 @@ export const Scene = ({ children }) => {
           position: fixed;
           top:33%;
           left:50%;
-          width:100%;
+          width:120%;
           height:100%;
           transform-origin: 50% 0;
           transform: translate3d(-50%,0,-500px) scale3d(2,2,1);
@@ -81,7 +84,7 @@ export const Scene = ({ children }) => {
           position: fixed;
           top:28%;
           left:50%;
-          width:40%;
+          width:60%;
           height:20%;
           transform: translate3d(-50%,-100%,300px) scale3d(2,2,1);
           backface-visibility: hidden;
