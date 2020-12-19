@@ -35,7 +35,6 @@ export const Scene = ({ children }) => {
           top: 0;
           overflow: visible;
           backface-visibility: hidden;
-
           animation-name: slide;
           animation-duration: 20s;
           animation-timing-function: cubic-bezier(0.420, 0.000, 0.580, 1.000);
