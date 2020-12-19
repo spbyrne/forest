@@ -3,8 +3,36 @@ import * as _ from 'underscore'
 import { mix, easeOutQuad, randomFromArray } from '@/util'
 import { Tree, Rock } from 'components'
 
-export const Forest = ({ numberOfObjects = 175 }) => {
+export const Forest = () => {
+  const [numberOfObjects, setNumberOfObject] = React.useState(0)
   const [output, setOutput] = React.useState(null)
+  const [windowSize, setWindowSize] = React.useState({
+    width: undefined,
+    height: undefined,
+  })
+
+  const updateWindowSize = () => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    })
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('resize', updateWindowSize)
+
+    updateWindowSize()
+
+    return () => {
+      window.removeEventListener('resize', updateWindowSize)
+    }
+  }, [])
+
+  React.useEffect(() => {
+    if (!windowSize) return
+    setNumberOfObject(Math.min(windowSize.width / 10, 200))
+  }, [windowSize])
+
   const objectOptions = [Tree, Tree, Tree, Rock]
 
   const objects = React.useMemo(() => {
