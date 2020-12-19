@@ -15,6 +15,7 @@ export const GlobalStyles = () => {
           overflow: hidden;
           transform-style: preserve-3d;
           background: black;
+          font-size: 16px;
         }
 
         *,

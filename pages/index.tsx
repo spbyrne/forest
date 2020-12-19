@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Forest, Scene } from '../components'
+import { Forest, Player, Scene } from '../components'
 
 function Index(props) {
   return (

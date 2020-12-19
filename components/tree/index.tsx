@@ -1,9 +1,16 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { mix, easeOutQuad, easeInQuad, easeInSin, easeOutExpo } from '@/util'
+import {
+  mix,
+  easeOutQuad,
+  easeInQuad,
+  easeInSin,
+  easeOutExpo,
+  easeInOutQuad,
+} from '@/util'
 
 export const Tree = ({
-  position = { top: '50%', left: '50%', zIndex: 50 },
+  position = { left: '50%', zIndex: 50 },
   blur = 0,
   depth = 0,
 }) => {
@@ -13,10 +20,10 @@ export const Tree = ({
     crownHeight,
     crownWidth,
   } = React.useMemo(() => {
-    const trunkHeight = Math.round(mix(20, 80, Math.random())) + `px`
-    const trunkWidth = Math.round(mix(15, 35, Math.random())) + `px`
-    const crownHeight = Math.round(mix(80, 200, Math.random())) + `px`
-    const crownWidth = Math.round(mix(60, 180, Math.random())) + `px`
+    const trunkHeight = Math.round(mix(30, 120, Math.random())) + `px`
+    const trunkWidth = Math.round(mix(20, 60, Math.random())) + `px`
+    const crownHeight = Math.round(mix(120, 300, Math.random())) + `px`
+    const crownWidth = Math.round(mix(80, 300, Math.random())) + `px`
 
     return { trunkHeight, trunkWidth, crownHeight, crownWidth }
   }, [])
@@ -40,47 +47,29 @@ export const Tree = ({
           transform: translate3d(0, 30vh, ${position.zIndex})
             scale3d(0.4, 0.4, 1);
           transform-origin: 50% 100%;
-          top: 0%;
           left: ${position.left};
+          transform-style: preserve-3d;
           filter: blur(var(--blur));
 
           /* Shadow */
           &:before {
             content: '';
-            display: block;
+            display: ${depth < 0.6 ? 'block' : 'none'};
             position: absolute;
-            bottom: calc(var(--trunk-height) * -0.5);
-            left: calc(var(--trunk-height) * 0.3);
-            width: var(--crown-width);
-            height: calc(var(--crown-width) * 0.3);
-            transform: translate3d(0, 0, 0);
-            border-radius: 100%;
-            background: hsla(274, 62, 17, 0.2);
-            filter: blur(10px);
-            opacity: calc(1 - ${easeOutQuad(depth)});
-            opacity: ${1 - easeOutQuad(depth)};
-          }
-
-          /* Trunk Shadow */
-          &:after {
-            content: '';
-            display: block;
-            position: absolute;
+            transform-origin: 50% 90%;
             bottom: 0;
             left: 0;
-            transform: translate3d(0, 100%, 0) rotate(-80deg);
-            width: var(--trunk-width);
-            height: var(--trunk-height);
-            transform-origin: 0 0;
-            z-index: -1;
-            filter: blur(1px);
-            background: linear-gradient(
-              to right,
-              hsla(310, 62%, 17%, 0.7),
-              hsla(310, 62%, 17%, 0.3),
-              transparent
+            width: var(--crown-width);
+            height: calc(var(--crown-height) / 10);
+            transform: translate3d(-50%, 0, 0) rotate3d(-1, 0, 0, 90deg);
+            border-radius: 100%;
+            background: radial-gradient(
+              farthest-side at 50% 80%,
+              hsla(274, 62, 17, 0.3),
+              hsla(274, 62, 17, 0.1),
+              hsla(274, 62, 17, 0)
             );
-            mask-image: linear-gradient(to bottom, white, transparent);
+            filter: blur(2px);
             opacity: ${1 - easeOutQuad(depth)};
           }
         }
@@ -94,10 +83,14 @@ export const Tree = ({
           background: ${`hsl(22, ` +
             mix(53, 20, easeOutQuad(depth)) +
             `%, ` +
-            mix(39, 85, easeOutQuad(depth)) +
+            mix(20, 75, easeOutQuad(depth)) +
             `%)`};
           box-shadow: inset -0.75rem calc(var(--crown-height) / 2 + 0.5rem) 1rem
-            ${`hsla(310, 62%, 17%, ` + (1 - easeOutQuad(depth)) + `)`};
+            ${`hsla(310, 62%, ` +
+              mix(12, 30, depth) +
+              `%, ` +
+              (1 - easeOutQuad(depth)) +
+              `)`};
           bottom: 0;
           left: 0;
           transform: translate3d(-50%, 0, 0);
@@ -105,13 +98,19 @@ export const Tree = ({
 
         .crown {
           position: absolute;
-          background: ${`hsl(88, ` +
+          background: ${`hsl(` +
+            mix(100, 80, depth) +
+            `, ` +
             mix(60, 20, depth) +
             `%, ` +
-            mix(30, 80, depth) +
+            mix(18, 76, easeOutQuad(depth)) +
             `%)`};
           box-shadow: inset -1rem -1.5rem 2rem
-            ${`hsla(176, 66%, 22%, ` + (1 - easeOutQuad(depth)) + `)`};
+            ${`hsla(176, 66%, ` +
+              mix(14, 24, depth) +
+              `%, ` +
+              (1 - easeOutQuad(depth)) +
+              `)`};
           width: var(--crown-width);
           height: var(--crown-height);
           bottom: var(--trunk-height);

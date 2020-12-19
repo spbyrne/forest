@@ -6,17 +6,14 @@ import { Tree } from 'components/tree'
 export const Forest = ({}) => {
   const generateTree = () => {
     let offsetTop = Math.random()
-    let top = Math.round(mix(0.3, 1, offsetTop) * 1000) / 10 + `%`
-    top = `30%`
     let left = Math.round(mix(0.1, 0.9, Math.random()) * 1000) / 10 + `%`
     let zIndex =
       Math.round(mix(0, 55, easeInOutQuad(offsetTop)) * 1000) / 1000 + 'px'
-    let blur = Math.round(mix(0, 15, offsetTop - 0.5) * 100) / 100 + `px`
+    let blur = Math.round(mix(0, 8, bias(offsetTop, 0.3)) * 100) / 100 + `px`
     let depth = Math.round((1 - easeOutQuad(offsetTop)) * 100) / 100
 
     return {
       position: {
-        top: top,
         left: left,
         zIndex: zIndex,
       },
@@ -36,7 +33,7 @@ export const Forest = ({}) => {
   }
 
   const trees = React.useMemo(() => {
-    return generateTrees(70)
+    return generateTrees(100)
   }, [])
 
   return (
