@@ -82,7 +82,7 @@ export const Scene = ({ children }) => {
         .fog {
           display: block;
           position: fixed;
-          top:28%;
+          top:24%;
           left:50%;
           width:60%;
           height:20%;
