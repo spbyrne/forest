@@ -23,6 +23,8 @@ export const GlobalStyles = () => {
           );
           font-size: 16px;
           overflow: hidden;
+          transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
         }
 
         *,

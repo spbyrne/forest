@@ -58,18 +58,18 @@ export const Tree = ({ depth, zIndex, left }) => {
           background: linear-gradient(
             to bottom,
             ${`hsl(` +
-              mix(110, 50, depth) +
+              mix(110, 50, easeOutQuad(depth)) +
               `, ` +
-              mix(60, 30, depth) +
+              mix(60, 30, easeOutQuad(depth)) +
               `%, ` +
-              mix(15, 78, depth) +
+              mix(15, 70, easeOutQuad(depth)) +
               `%)`},
             ${`hsl(` +
-              mix(130, 130, depth) +
+              mix(130, 130, easeOutQuad(depth)) +
               `, ` +
-              mix(60, 24, depth) +
+              mix(60, 24, easeOutQuad(depth)) +
               `%, ` +
-              mix(15, 70, depth) +
+              mix(15, 65, easeOutQuad(depth)) +
               `%)`}
           );
           box-shadow: inset 0 -4rem 3rem -2rem
