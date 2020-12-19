@@ -112,7 +112,12 @@ export const Tree = ({
             `%, ` +
             mix(12, 74, easeOutQuad(depth)) +
             `%)`};
-          box-shadow: inset 0 -1.5rem 2rem ${`hsla(176, 66%, ` + mix(12, 24, depth) + `%, ` + (1 - easeOutQuad(depth)) + `)`},
+          box-shadow: inset 0 -4rem 3rem -2rem
+              ${`hsla(176, 66%, ` +
+                mix(12, 24, depth) +
+                `%, ` +
+                (1 - easeOutQuad(depth)) +
+                `)`},
             inset 0 1.5rem 5rem -2rem ${`hsla(58, 66%, 93%, ` + easeOutQuad(depth - 0.2) + `)`};
           width: var(--crown-width);
           height: var(--crown-height);
