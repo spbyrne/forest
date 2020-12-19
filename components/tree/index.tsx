@@ -56,11 +56,11 @@ export const Tree = ({ depth, zIndex, left }) => {
 
         .crown {
           background: ${`hsl(` +
-            mix(100, 80, depth) +
+            mix(130, 90, depth) +
             `, ` +
-            mix(56, 20, depth) +
+            mix(60, 20, depth) +
             `%, ` +
-            mix(12, 74, easeOutQuad(depth)) +
+            mix(15, 73, depth) +
             `%)`};
           box-shadow: inset 0 -4rem 3rem -2rem
               ${`hsla(176, 66%, ` +
