@@ -13,7 +13,7 @@ function Index(props) {
         .camera {
           display: block;
           position: absolute;
-          perspective: 50px;
+          perspective: 100px;
           perspective-origin: 50% 28%;
           transform-style: preserve-3d;
           width: 100%;

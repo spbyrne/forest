@@ -8,7 +8,7 @@ export const Forest = ({}) => {
     let offsetTop = Math.random()
     let left = Math.round(mix(0.1, 0.9, Math.random()) * 1000) / 10 + `%`
     let zIndex =
-      Math.round(mix(0, 55, easeInOutQuad(offsetTop)) * 1000) / 1000 + 'px'
+      Math.round(mix(0, 99, easeInOutQuad(offsetTop)) * 1000) / 1000 + 'px'
     let blur = Math.round(mix(0, 8, bias(offsetTop, 0.3)) * 100) / 100 + `px`
     let depth = Math.round((1 - easeOutQuad(offsetTop)) * 100) / 100
 
