@@ -11,21 +11,16 @@ import {
 } from '@/util'
 import { Tree } from 'components/tree'
 
-export const Forest = ({ numberOfTrees = 200 }) => {
+export const Forest = ({ numberOfTrees = 180 }) => {
   const generateTree = () => {
     let offsetTop = Math.random()
-    let left = Math.round(mix(-0.3, 1.3, Math.random()) * 1000) / 10 + `%`
-    let zIndex =
-      Math.round(mix(0, 500, easeInOutQuad(offsetTop)) * 1000) / 1000 + 'px'
-    let blur = Math.round(mix(0, 5, easeInExpo(offsetTop))) + `px`
+    let left = Math.round(mix(-0.4, 1.4, Math.random()) * 1000) / 10 + `%`
+    let zIndex = Math.round(mix(0, 700, offsetTop) * 1000) / 1000 + 'px'
     let depth = Math.round((1 - easeOutQuad(offsetTop)) * 100) / 100
 
     return {
-      position: {
-        left: left,
-        zIndex: zIndex,
-      },
-      blur: blur,
+      left: left,
+      zIndex: zIndex,
       depth: depth,
     }
   }
@@ -47,7 +42,7 @@ export const Forest = ({ numberOfTrees = 200 }) => {
   return (
     <>
       {trees.map((tree, index) => (
-        <Tree position={tree.position} blur={tree.blur} depth={tree.depth} />
+        <Tree {...tree} />
       ))}
     </>
   )

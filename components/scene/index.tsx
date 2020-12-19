@@ -56,19 +56,18 @@ export const Scene = ({ children }) => {
         .ground {
           display: block;
           position: fixed;
-          top:-60%;
-          left:-60%;
-          width:220%;
-          height:220%;
-          z-index: -1;
+          top:33%;
+          left:50%;
+          width:400%;
+          height:200%;
+          transform: translate3d(-50%,0,-500px);
           background: linear-gradient(
             to bottom,
-            transparent 38%,
-            hsla(186, 20%, 86%,0.5) 40%,
-            hsl(166, 15%, 75%) 42%,
-            hsl(133, 23%, 48%) 55%,
-            hsl(150, 47%, 27%) 75%,
-            hsl(197, 70%, 18%) 86%,
+            hsla(186, 20%, 86%,0.5) ,
+            hsl(166, 15%, 75%) 3%,
+            hsl(133, 23%, 48%) 25%,
+            hsl(150, 47%, 27%) 60%,
+            hsl(197, 70%, 18%) 75%,
             hsl(210, 80%, 10%)
           );
         }
