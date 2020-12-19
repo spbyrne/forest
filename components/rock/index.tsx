@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { mix, easeOutQuad } from '@/util'
+import { mix, easeOutQuad, easeOutExpo } from '@/util'
 
 export const Rock = ({ depth, zIndex, left }) => {
   const { rockWidth, rockHeight } = React.useMemo(() => {
@@ -37,8 +37,7 @@ export const Rock = ({ depth, zIndex, left }) => {
             `%, ` +
             mix(20, 73, easeOutQuad(depth)) +
             `%)`};
-          box-shadow: inset 0 0.5rem 1.5rem -0.5rem ${`hsl(30, 12%, ` + mix(40, 80, depth) + `%)`};
-
+          box-shadow: inset 0 0.5rem 1.5rem -0.5rem ${`hsl(30, 12%, ` + mix(40, 90, easeOutExpo(depth)) + `%)`};
           transform-origin: 50% 100%;
         }
 
