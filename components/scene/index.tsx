@@ -6,8 +6,10 @@ export const Scene = ({ children }) => {
       <div className="scene">
         {children}
         <div className="sun"></div>
+        <div className="fog"></div>
         <div className="ground"></div>
       </div>
+      x
       <style>{`
         @keyframes slide {
           0% {
@@ -33,6 +35,7 @@ export const Scene = ({ children }) => {
           height: 100%;
           top: 0;
           overflow: visible;
+          backface-visibility: hidden;
 
           animation-name: slide;
           animation-duration: 20s;
@@ -48,9 +51,10 @@ export const Scene = ({ children }) => {
           width: 400px;
           height:400px;
           box-shadow: 0 0 2000px 500px hsla(47,10%,85%,0.3);
-          transform: translate3d(-50%,-50%,-500px);
+          transform: translate3d(-50%,-50%,-700px);
           background: hsl(50,75%,90%);
           border-radius: 100%;
+          backface-visibility: hidden;
         }
 
         .ground {
@@ -61,6 +65,7 @@ export const Scene = ({ children }) => {
           width:400%;
           height:200%;
           transform: translate3d(-50%,0,-500px);
+          backface-visibility: hidden;
           background: linear-gradient(
             to bottom,
             hsla(186, 20%, 86%,0.5) ,
@@ -69,6 +74,25 @@ export const Scene = ({ children }) => {
             hsl(150, 47%, 27%) 60%,
             hsl(197, 70%, 18%) 75%,
             hsl(210, 80%, 10%)
+          );
+        }
+
+        .fog {
+          display: block;
+          position: fixed;
+          top:40%;
+          left:50%;
+          width:400%;
+          height:70%;
+          transform: translate3d(-50%,-100%,300px);
+          backface-visibility: hidden;
+          background: linear-gradient(
+            to bottom,
+            hsla(186, 20%, 86%,0),
+            hsla(186, 20%, 86%,0.15),
+            hsla(186, 20%, 86%,0.4) 80%,
+            hsla(186, 20%, 86%,0.15) 90%,
+            hsla(186, 20%, 86%,0)
           );
         }
       `}</style>

@@ -16,9 +16,9 @@ export const Tree = ({ depth, zIndex, left }) => {
     crownHeight,
     crownWidth,
   } = React.useMemo(() => {
-    const trunkHeight = Math.round(mix(30, 120, Math.random())) + `px`
+    const trunkHeight = Math.round(mix(20, 120, Math.random())) + `px`
     const trunkWidth = Math.round(mix(20, 60, Math.random())) + `px`
-    const crownHeight = Math.round(mix(120, 300, Math.random())) + `px`
+    const crownHeight = Math.round(mix(120, 350, Math.random())) + `px`
     const crownWidth = Math.round(mix(80, 300, Math.random())) + `px`
 
     return { trunkHeight, trunkWidth, crownHeight, crownWidth }
@@ -91,6 +91,7 @@ export const Tree = ({ depth, zIndex, left }) => {
           transform-origin: 50% 100%;
           top: 32%;
           transform-style: preserve-3d;
+          backface-visibility: hidden;
         }
 
         .trunk {
@@ -110,6 +111,7 @@ export const Tree = ({ depth, zIndex, left }) => {
           bottom: 0;
           left: 0;
           transform: translate3d(-50%, 0, 0);
+          backface-visibility: hidden;
         }
 
         .crown {
@@ -119,6 +121,7 @@ export const Tree = ({ depth, zIndex, left }) => {
           bottom: var(--trunk-height);
           border-radius: 100%;
           transform: translate3d(-50%, 0, 0);
+          backface-visibility: hidden;
         }
 
         .shadow {

@@ -9,6 +9,7 @@ function Index(props) {
           <Forest />
         </Scene>
       </div>
+      <div className="overlay"></div>
       <style>{`
         .camera {
           display: block;
@@ -20,6 +21,16 @@ function Index(props) {
           height: 100%;
           top: 0;
           left: 0;
+        }
+
+        .overlay {
+          transform-style: flat;
+          position: absolute;
+          left: -25%;
+          top: -25%;
+          width: 150%;
+          height: 150%;
+          background: radial-gradient(ellipse,transparent,transparent,hsl(205,86%,18%));
         }
       `}</style>
     </>
