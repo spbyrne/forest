@@ -9,7 +9,6 @@ export const Scene = ({ children }) => {
         <div className="fog"></div>
         <div className="ground"></div>
       </div>
-      x
       <style>{`
         @keyframes slide {
           0% {
@@ -48,10 +47,10 @@ export const Scene = ({ children }) => {
           position: fixed;
           top: -40%;
           left: 40%;
-          width: 400px;
-          height:400px;
+          width: 200px;
+          height:200px;
           box-shadow: 0 0 2000px 500px hsla(47,10%,85%,0.3);
-          transform: translate3d(-50%,-50%,-700px);
+          transform: translate3d(-50%,-50%,-700px) scale3d(2,2,1);
           background: hsl(50,75%,90%);
           border-radius: 100%;
           backface-visibility: hidden;
@@ -62,9 +61,10 @@ export const Scene = ({ children }) => {
           position: fixed;
           top:33%;
           left:50%;
-          width:400%;
-          height:200%;
-          transform: translate3d(-50%,0,-500px);
+          width:100%;
+          height:100%;
+          transform-origin: 50% 0;
+          transform: translate3d(-50%,0,-500px) scale3d(2,2,1);
           backface-visibility: hidden;
           background: linear-gradient(
             to bottom,
@@ -72,7 +72,7 @@ export const Scene = ({ children }) => {
             hsl(166, 15%, 75%) 3%,
             hsl(133, 23%, 48%) 25%,
             hsl(150, 47%, 27%) 60%,
-            hsl(197, 70%, 18%) 75%,
+            hsl(197, 70%, 18%) 80%,
             hsl(210, 80%, 10%)
           );
         }
@@ -80,18 +80,18 @@ export const Scene = ({ children }) => {
         .fog {
           display: block;
           position: fixed;
-          top:40%;
+          top:28%;
           left:50%;
-          width:400%;
-          height:70%;
-          transform: translate3d(-50%,-100%,300px);
+          width:40%;
+          height:20%;
+          transform: translate3d(-50%,-100%,300px) scale3d(2,2,1);
           backface-visibility: hidden;
           background: linear-gradient(
             to bottom,
             hsla(186, 20%, 86%,0),
-            hsla(186, 20%, 86%,0.15),
-            hsla(186, 20%, 86%,0.4) 80%,
-            hsla(186, 20%, 86%,0.15) 90%,
+            hsla(186, 20%, 86%,0.1),
+            hsla(186, 20%, 86%,0.3) 82%,
+            hsla(186, 20%, 86%,0.1) 90%,
             hsla(186, 20%, 86%,0)
           );
         }

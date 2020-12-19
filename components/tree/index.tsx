@@ -16,10 +16,10 @@ export const Tree = ({ depth, zIndex, left }) => {
     crownHeight,
     crownWidth,
   } = React.useMemo(() => {
-    const trunkHeight = Math.round(mix(20, 120, Math.random())) + `px`
-    const trunkWidth = Math.round(mix(20, 60, Math.random())) + `px`
-    const crownHeight = Math.round(mix(120, 350, Math.random())) + `px`
-    const crownWidth = Math.round(mix(80, 300, Math.random())) + `px`
+    const trunkHeight = Math.round(mix(8, 48, Math.random())) + `px`
+    const trunkWidth = Math.round(mix(8, 24, Math.random())) + `px`
+    const crownHeight = Math.round(mix(48, 140, Math.random())) + `px`
+    const crownWidth = Math.round(mix(32, 120, Math.random())) + `px`
 
     return { trunkHeight, trunkWidth, crownHeight, crownWidth }
   }, [])
@@ -34,8 +34,9 @@ export const Tree = ({ depth, zIndex, left }) => {
       <style jsx>{`
         .tree {
           --depth: ${depth};
-          --shadow-opacity: ${Math.max(mix(1, -1, depth), 0)};
-          transform: translate3d(0, 0, ${zIndex}) scale3d(0.4, 0.4, 1);
+          --shadow-opacity: ${Math.round(Math.max(mix(1, -1, depth), 0) * 100) /
+            100};
+          transform: translate3d(0, 0, ${zIndex});
           left: ${left};
         }
 
@@ -126,11 +127,12 @@ export const Tree = ({ depth, zIndex, left }) => {
 
         .shadow {
           position: absolute;
-          transform-origin: 50% 97%;
+          transform-origin: 50% 95%;
           bottom: 0;
           left: 0;
-          width: calc(var(--crown-width) * 1.5);
-          transform: translate3d(-50%, 0, 0px) rotate3d(-1, 0, 0, 90deg);
+          width: calc(var(--crown-width) * 0.75);
+          transform: translate3d(-50%, 0, 0px) rotate3d(-1, 0, 0, 90deg)
+            scale3d(2, 2, 1);
           border-radius: 100%;
           opacity: var(--shadow-opacity);
         }

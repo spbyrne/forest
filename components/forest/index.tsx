@@ -11,7 +11,7 @@ import {
 } from '@/util'
 import { Tree } from 'components/tree'
 
-export const Forest = ({ numberOfTrees = 150 }) => {
+export const Forest = ({ numberOfTrees = 200 }) => {
   const generateTree = () => {
     let offsetTop = Math.random()
     let left = Math.round(mix(-0.4, 1.4, Math.random()) * 1000) / 10 + `%`
