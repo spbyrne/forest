@@ -55,20 +55,32 @@ export const Tree = ({ depth, zIndex, left }) => {
         }
 
         .crown {
-          background: ${`hsl(` +
-            mix(130, 90, depth) +
-            `, ` +
-            mix(60, 20, depth) +
-            `%, ` +
-            mix(15, 73, depth) +
-            `%)`};
+          background: linear-gradient(
+            to bottom,
+            ${`hsl(` +
+              mix(110, 50, depth) +
+              `, ` +
+              mix(60, 30, depth) +
+              `%, ` +
+              mix(15, 78, depth) +
+              `%)`},
+            ${`hsl(` +
+              mix(130, 130, depth) +
+              `, ` +
+              mix(60, 24, depth) +
+              `%, ` +
+              mix(15, 70, depth) +
+              `%)`}
+          );
           box-shadow: inset 0 -4rem 3rem -2rem
-              ${`hsla(176, 66%, ` +
-                mix(12, 24, depth) +
+              ${`hsla(176, ` +
+                mix(88, 50, depth) +
+                `%, ` +
+                mix(5, 24, depth) +
                 `%, ` +
                 (1 - easeOutQuad(depth)) +
                 `)`},
-            inset 0 1.5rem 5rem -2rem ${`hsla(58, 66%, 93%, ` + easeOutQuad(depth - 0.2) + `)`};
+            inset 0 3rem 4rem -2rem ${`hsla(58, 60%, 93%, ` + easeOutQuad(depth - 0.3) + `)`};
         }
 
         .shadow {
