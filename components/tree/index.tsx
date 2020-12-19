@@ -55,18 +55,18 @@ export const Tree = ({
             content: '';
             display: ${depth < 0.6 ? 'block' : 'none'};
             position: absolute;
-            transform-origin: 50% 90%;
+            transform-origin: 50% 97%;
             bottom: 0;
             left: 0;
-            width: var(--crown-width);
-            height: calc(var(--crown-height) / 4);
-            transform: translate3d(-50%, 0, 0) rotate3d(-1, 0, 0, 90deg);
+            width: calc(var(--crown-width) * 1.5);
+            height: calc(var(--crown-height) / ${mix(1, 8, depth)});
+            transform: translate3d(-50%, 0, 0px) rotate3d(-1, 0, 0, 90deg);
             border-radius: 100%;
             background: radial-gradient(
               farthest-side at 50% 80%,
-              hsla(274, 62, 17, 0.3),
-              hsla(274, 62, 17, 0.1),
-              hsla(274, 62, 17, 0)
+              ${`hsla(274, 62%, ` + mix(17, 33, depth) + `%, 0.4)`},
+              ${`hsla(274, 62%, ` + mix(17, 33, depth) + `%, 0.15)`},
+              ${`hsla(274, 62%, ` + mix(17, 33, depth) + `%, 0)`}
             );
             filter: blur(2px);
             opacity: ${1 - easeOutQuad(depth)};
