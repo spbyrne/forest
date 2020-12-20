@@ -1,73 +1,66 @@
+import { Player } from 'components'
 import * as React from 'react'
 
 export const Scene = ({ children }) => {
   return (
     <>
       <div className="scene">
+        <Player />
         {children}
         <div className="sun"></div>
         <div className="fog"></div>
         <div className="ground"></div>
       </div>
       <style>{`
-        @keyframes slide {
-          0% {
-            transform: translate3d(300px, 0, 0);
-          }
-          25% {
-            transform: translate3d(-300px, 0, 0);
-          }
-          50% {
-            transform: translate3d(-300px, 180px, -300px);
-          }
-          75% {
-            transform: translate3d(300px, 180px, -300px);
-          }
-          100% {
-            transform: translate3d(300px, 0, 0);
-          }
+      @keyframes intro {
+        0% {
+          transform: translate3d(0, 200px,-200px);
         }
-        
+        100% {
+          transform: translate3d(0, 0, 0);  
+        }
+      }
+      
         .scene {
           transform-style: preserve-3d;
           position: relative;
           display: block;
-          left: -300px;
-          width: calc(100% + 600px);
+          width: 100%;
           height: 100%;
-          top: 0;
+          transform: translate3d(0, 0, 0);  
           overflow: visible;
           backface-visibility: hidden;
-          will-change: transform;
-          animation-name: slide;
-          animation-duration: 30s;
+
+          animation-name: intro;
+          animation-duration: 10s;
           animation-timing-function: cubic-bezier(0.420, 0.000, 0.580, 1.000);
-          animation-iteration-count: infinite;
+          animation-iteration-count: 1;
           animation-fill-mode: both;
-          animation-delay: 1s;
+          animation-delay: 5s;
         }
 
         .sun {
           display: block;
-          position: fixed;
+          position: absolute;
           top: -40%;
           left: 40%;
           width: 200px;
           height:200px;
           box-shadow: 0 0 2000px 500px hsla(47,10%,85%,0.3);
           transform: translate3d(-50%,-50%,-700px) scale3d(2,2,1);
-          background: hsl(50,75%,90%);
+          background: hsl(50,85%,94%);
+          opacity: 0.8;
           border-radius: 100%;
           backface-visibility: hidden;
         }
 
         .ground {
           display: block;
-          position: fixed;
+          position: absolute;
           top:33%;
           left:50%;
           width:120%;
-          height:100%;
+          height:90%;
           transform-origin: 50% 0;
           transform: translate3d(-50%,0,-500px) scale3d(2,2,1);
           backface-visibility: hidden;
@@ -84,7 +77,7 @@ export const Scene = ({ children }) => {
 
         .fog {
           display: block;
-          position: fixed;
+          position: absolute;
           top:28%;
           left:50%;
           width:60%;

@@ -1,7 +1,37 @@
 import * as React from 'react'
+import { useKeyboardShortcuts } from 'use-keyboard-shortcuts'
 import { Forest, Player, Scene } from '../components'
+import { useInterval } from '@/util'
 
 function Index(props) {
+  var [playerPosition, setPlayerPosition] = React.useState(0)
+  var [playerSpeed, setPlayerSpeed] = React.useState(0)
+
+  const moveRight = () => {
+    if (playerSpeed < 10) {
+      setPlayerSpeed(playerSpeed + 1)
+    }
+  }
+
+  const moveLeft = () => {
+    if (playerSpeed > -10) {
+      setPlayerSpeed(playerSpeed - 1)
+    }
+  }
+
+  const gameLoop = () => {
+    setPlayerPosition(playerPosition + playerSpeed)
+  }
+
+  useKeyboardShortcuts([
+    { keys: ['ArrowRight'], onEvent: moveRight },
+    { keys: ['ArrowLeft'], onEvent: moveLeft },
+  ])
+
+  useInterval(() => {
+    gameLoop()
+  }, '50ms')
+
   return (
     <>
       <div className="camera">
@@ -10,6 +40,13 @@ function Index(props) {
         </Scene>
       </div>
       <div className="overlay"></div>
+      <style>{`
+        .camera {
+          --player-position: ${playerPosition};
+
+          transition: all 1s ease-out;
+        }
+      `}</style>
       <style>{`
         .camera {
           display: block;
@@ -31,6 +68,7 @@ function Index(props) {
           width: 150%;
           height: 150%;
           background: radial-gradient(ellipse,transparent,transparent,hsl(205,86%,18%));
+          pointer-events: none;
         }
       `}</style>
     </>

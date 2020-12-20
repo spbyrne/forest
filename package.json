@@ -18,7 +18,8 @@
     "react-dom": "^17.0.1",
     "sass": "^1.27.0",
     "styled-jsx-plugin-sass": "^1.0.0",
-    "underscore": "^1.12.0"
+    "underscore": "^1.12.0",
+    "use-keyboard-shortcuts": "^2.2.2"
   },
   "devDependencies": {
     "@types/cookie": "^0.3.3",
