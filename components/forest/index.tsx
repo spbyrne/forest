@@ -30,7 +30,7 @@ export const Forest = () => {
 
   React.useEffect(() => {
     if (!windowSize) return
-    setNumberOfObject(Math.min(windowSize.width / 15, 200))
+    setNumberOfObject(Math.min(windowSize.width / 10, 1000))
   }, [windowSize])
 
   const objectOptions = [Tree, Tree, Tree, Rock]

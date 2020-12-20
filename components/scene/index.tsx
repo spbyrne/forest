@@ -1,4 +1,4 @@
-import { Player } from 'components'
+import { Fog, Player } from 'components'
 import * as React from 'react'
 
 export const Scene = ({ children }) => {
@@ -7,7 +7,7 @@ export const Scene = ({ children }) => {
       <div className="scene">
         {children}
         <div className="sun"></div>
-        <div className="fog"></div>
+        <Fog />
         <div className="ground"></div>
       </div>
       <style>{`
@@ -75,26 +75,6 @@ export const Scene = ({ children }) => {
             hsl(210, 80%, 10%)
           );
         }
-
-        .fog {
-          display: block;
-          position: absolute;
-          top:28%;
-          left:50%;
-          width:60%;
-          height:25%;
-          transform-origin: 50% 100%;
-          transform: translate3d(-50%,-100%,300px) scale3d(2,2,1);
-          backface-visibility: hidden;
-          background: linear-gradient(
-            to bottom,
-            hsla(120, 20%, 86%,0),
-            hsla(180, 20%, 86%,0.1),
-            hsla(50, 30%, 86%,0.2) 78%,
-            hsla(50, 30%, 86%,0.3) 84%,
-            hsla(80, 20%, 86%,0.1) 94%,
-            hsla(120, 20%, 86%,0)
-          );
         }
       `}</style>
     </>
