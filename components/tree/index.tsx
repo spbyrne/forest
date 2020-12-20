@@ -29,13 +29,14 @@ export const Tree = ({ depth, zIndex, left }) => {
       <div className="tree">
         <span className="trunk"></span>
         <span className="crown"></span>
-        {depth < 0.5 && <div className="shadow"></div>}
+        {depth < 0.7 && <div className="shadow"></div>}
       </div>
       <style jsx>{`
         .tree {
           --depth: ${depth};
-          --shadow-opacity: ${Math.round(Math.max(mix(1, -1, depth), 0) * 100) /
-            100};
+          --shadow-opacity: ${Math.round(
+            Math.max(mix(1, -0.5, depth), 0) * 100
+          ) / 100};
           transform: translate3d(
             calc(-1px * var(--player-position)),
             0,
@@ -46,9 +47,9 @@ export const Tree = ({ depth, zIndex, left }) => {
 
         .trunk {
           background: ${`hsl(22, ` +
-            mix(45, 16, easeOutQuad(depth)) +
+            mix(45, 10, depth) +
             `%, ` +
-            mix(18, 85, depth) +
+            mix(18, 78, depth) +
             `%)`};
           box-shadow: inset -8px calc(var(--crown-height) / 2 + 8px) 8px ${`hsla(310, ` + mix(62, 35, depth) + `%, ` + mix(12, 35, depth) + `%, ` + (1 - easeOutQuad(depth)) + `)`};
         }
@@ -86,9 +87,9 @@ export const Tree = ({ depth, zIndex, left }) => {
           height: calc(var(--crown-height) / ${mix(1, 8, depth)});
           background: radial-gradient(
             farthest-side at 50% 80%,
-            ${`hsla(274, 62%, ` + mix(17, 33, depth) + `%, 0.4)`},
-            ${`hsla(274, 62%, ` + mix(17, 33, depth) + `%, 0.15)`},
-            ${`hsla(274, 62%, ` + mix(17, 33, depth) + `%, 0)`}
+            ${`hsla(200, 62%, ` + mix(8, 20, easeOutQuad(depth)) + `%, 0.5)`},
+            ${`hsla(200, 62%, ` + mix(10, 30, easeOutQuad(depth)) + `%, 0.2)`},
+            ${`hsla(200, 62%, ` + mix(12, 33, easeOutQuad(depth)) + `%, 0)`}
           );
         }
       `}</style>
@@ -101,7 +102,7 @@ export const Tree = ({ depth, zIndex, left }) => {
 
           position: absolute;
           transform-origin: 50% 100%;
-          top: 32%;
+          top: var(--scene-horizon);
           transform-style: preserve-3d;
           backface-visibility: hidden;
         }

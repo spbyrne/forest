@@ -16,7 +16,7 @@ export const Fog = ({ density = 0.2 }) => {
 
           display: block;
           position: absolute;
-          top: 32%;
+          top: var(--scene-horizon);
           left:50%;
           width:100%;
           height:50%;

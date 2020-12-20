@@ -29,7 +29,7 @@ export const Rock = ({ depth, zIndex, left }) => {
           left: ${left};
           position: absolute;
           transform-origin: 50% 100%;
-          top: 32%;
+          top: var(--scene-horizon);
           transform-style: preserve-3d;
           backface-visibility: hidden;
           display: block;
@@ -52,9 +52,9 @@ export const Rock = ({ depth, zIndex, left }) => {
           bottom: 1px;
           background: linear-gradient(
             to top,
-            ${`hsla(274, 62%, ` + mix(17, 33, depth) + `%, 0.4)`},
-            ${`hsla(274, 62%, ` + mix(17, 33, depth) + `%, 0.15)`},
-            ${`hsla(274, 62%, ` + mix(17, 33, depth) + `%, 0)`}
+            ${`hsla(200, 62%, ` + mix(17, 33, depth) + `%, 0.4)`},
+            ${`hsla(200, 62%, ` + mix(17, 33, depth) + `%, 0.15)`},
+            ${`hsla(200, 62%, ` + mix(17, 33, depth) + `%, 0)`}
           );
           transform-origin: 50% 100%;
           transform-style: preserve-3d;

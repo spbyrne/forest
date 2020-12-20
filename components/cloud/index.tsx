@@ -27,7 +27,7 @@ export const Cloud = ({ depth, zIndex, left }) => {
           left: ${left};
           position: absolute;
           transform-origin: 50% 100%;
-          top: 32%;
+          top: var(--scene-horizon);
           transform-style: preserve-3d;
           backface-visibility: hidden;
           display: block;
