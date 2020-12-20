@@ -6,21 +6,24 @@ import { useInterval } from '@/util'
 function Index(props) {
   var [playerPosition, setPlayerPosition] = React.useState(0)
   var [playerSpeed, setPlayerSpeed] = React.useState(0)
+  var [moving, setMoving] = React.useState('false')
 
   const moveRight = () => {
-    if (playerSpeed < 10) {
-      setPlayerSpeed(playerSpeed + 1)
-    }
+    setMoving('right')
   }
 
   const moveLeft = () => {
-    if (playerSpeed > -10) {
-      setPlayerSpeed(playerSpeed - 1)
-    }
+    setMoving('left')
   }
 
   const gameLoop = () => {
     setPlayerPosition(playerPosition + playerSpeed)
+    if (playerSpeed > 0) {
+      setPlayerSpeed(Math.min(0, playerSpeed - 0.1))
+    }
+    if (playerSpeed < 0) {
+      setPlayerSpeed(Math.max(0, playerSpeed + 0.1))
+    }
   }
 
   useKeyboardShortcuts([

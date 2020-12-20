@@ -34,7 +34,7 @@ export const Player = ({}) => {
           height: var(--player-size);
           border-radius: 100px 100px 0 0;
           background: hsl(31, 60, 20);
-          box-shadow: inset 0 0.75rem 1rem -0.5rem hsl(202, 60, 14);
+          box-shadow: inset 0 0.75rem 1rem -0.5rem hsl(31, 30, 40);
         }
 
         .head {
@@ -53,7 +53,8 @@ export const Player = ({}) => {
           width: var(--head-size);
           height: var(--head-size);
           background: hsl(31, 60, 20);
-          box-shadow: inset 0 2px 10px -2px hsl(202, 60, 14);
+          box-shadow: inset 0 2px 10px -2px hsl(31, 30, 40),
+            0 7px 5px -5px hsl(20, 60, 18);
 
           &:before,
           &:after {
@@ -72,7 +73,7 @@ export const Player = ({}) => {
               transparent
             );
             background: hsl(31, 60, 20);
-            box-shadow: inset 0 2px 4px -1px hsl(202, 60, 14);
+            box-shadow: inset 0 2px 4px -1px hsl(31, 30, 40);
           }
 
           &:before {

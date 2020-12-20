@@ -5,21 +5,20 @@ export const Scene = ({ children }) => {
   return (
     <>
       <div className="scene">
-        <Player />
         {children}
         <div className="sun"></div>
         <div className="fog"></div>
         <div className="ground"></div>
       </div>
       <style>{`
-      @keyframes intro {
-        0% {
-          transform: translate3d(0, 200px,-200px);
+        @keyframes intro- {
+          0% {
+            transform: translate3d(0, 200px,-200px);
+          }
+          100% {
+            transform: translate3d(0, 30px, 0);  
+          }
         }
-        100% {
-          transform: translate3d(0, 0, 0);  
-        }
-      }
       
         .scene {
           transform-style: preserve-3d;
@@ -37,6 +36,8 @@ export const Scene = ({ children }) => {
           animation-iteration-count: 1;
           animation-fill-mode: both;
           animation-delay: 5s;
+
+          transform: translate3d(0, 200px,-200px);
         }
 
         .sun {
@@ -59,8 +60,8 @@ export const Scene = ({ children }) => {
           position: absolute;
           top:33%;
           left:50%;
-          width:120%;
-          height:90%;
+          width:140%;
+          height:80%;
           transform-origin: 50% 0;
           transform: translate3d(-50%,0,-500px) scale3d(2,2,1);
           backface-visibility: hidden;

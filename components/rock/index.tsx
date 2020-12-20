@@ -39,9 +39,9 @@ export const Rock = ({ depth, zIndex, left }) => {
           background: ${`hsl(22, ` +
             mix(4, 12, depth) +
             `%, ` +
-            mix(20, 73, easeOutQuad(depth)) +
+            mix(14, 73, easeOutQuad(depth)) +
             `%)`};
-          box-shadow: inset 0 1rem 1.5rem -1rem ${`hsl(30, 12%, ` + mix(40, 90, easeOutExpo(depth)) + `%)`};
+          box-shadow: inset 0 1rem 1.5rem -1rem ${`hsl(30, 12%, ` + mix(35, 90, easeOutExpo(depth)) + `%)`};
           transform-origin: 50% 100%;
         }
 
