@@ -18,7 +18,7 @@ export const GlobalStyles = () => {
           background: linear-gradient(
             to bottom,
             hsl(197, 84%, 70%),
-            hsl(197, 64%, 78%) 25%,
+            hsl(197, 64%, 78%) 30%,
             hsl(197, 64%, 88%) 80%
           );
           font-size: 16px;
