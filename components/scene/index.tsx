@@ -47,7 +47,7 @@ export const Scene = ({ children }) => {
           left: 40%;
           width: 200px;
           height:200px;
-          box-shadow: 0 0 2000px 500px hsla(47,10%,85%,0.3);
+          box-shadow: 0 0 2500px 400px hsla(47,30%,94%,0.3);
           transform: translate3d(-50%,-50%,-700px) scale3d(2,2,1);
           background: hsl(50,85%,94%);
           opacity: 0.8;

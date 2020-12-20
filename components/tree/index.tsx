@@ -46,16 +46,11 @@ export const Tree = ({ depth, zIndex, left }) => {
 
         .trunk {
           background: ${`hsl(22, ` +
-            mix(53, 20, easeOutQuad(depth)) +
+            mix(45, 16, easeOutQuad(depth)) +
             `%, ` +
-            mix(16, 73, easeOutQuad(depth)) +
+            mix(18, 85, depth) +
             `%)`};
-          box-shadow: inset -0.75rem calc(var(--crown-height) / 2 + 0.5rem) 1rem
-            ${`hsla(310, 62%, ` +
-              mix(12, 30, depth) +
-              `%, ` +
-              (1 - easeOutQuad(depth)) +
-              `)`};
+          box-shadow: inset -8px calc(var(--crown-height) / 2 + 8px) 8px ${`hsla(310, ` + mix(62, 35, depth) + `%, ` + mix(12, 35, depth) + `%, ` + (1 - easeOutQuad(depth)) + `)`};
         }
 
         .crown {
