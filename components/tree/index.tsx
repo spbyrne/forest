@@ -1,13 +1,6 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import {
-  mix,
-  easeOutQuad,
-  easeInQuad,
-  easeInSin,
-  easeOutExpo,
-  easeInOutQuad,
-} from '@/util'
+import { mix, easeOutQuad } from '@/util'
 
 export const Tree = ({ depth, zIndex, left }) => {
   const {
@@ -29,20 +22,19 @@ export const Tree = ({ depth, zIndex, left }) => {
       <div className="tree">
         <span className="trunk"></span>
         <span className="crown"></span>
-        {depth < 0.7 && <div className="shadow"></div>}
+        <div className="shadow">
+          <span className="shadowTrunk"></span>
+          <span className="shadowCrown"></span>
+        </div>
       </div>
       <style jsx>{`
         .tree {
+          --offset: ${left};
           --depth: ${depth};
           --shadow-opacity: ${Math.round(
             Math.max(mix(1, -0.5, depth), 0) * 100
           ) / 100};
-          transform: translate3d(
-            calc(-1px * var(--player-position)),
-            0,
-            ${zIndex}
-          );
-          left: ${left};
+          transform: translate3d(0, 0, ${zIndex});
         }
 
         .trunk {
@@ -82,20 +74,13 @@ export const Tree = ({ depth, zIndex, left }) => {
                 `)`},
             inset 0 3rem 4rem -2rem ${`hsla(58, 60%, 93%, ` + easeOutQuad(depth - 0.3) + `)`};
         }
-
-        .shadow {
-          height: calc(var(--crown-height) / ${mix(1, 8, depth)});
-          background: radial-gradient(
-            farthest-side at 50% 80%,
-            ${`hsla(200, 62%, ` + mix(8, 20, easeOutQuad(depth)) + `%, 0.5)`},
-            ${`hsla(200, 62%, ` + mix(10, 30, easeOutQuad(depth)) + `%, 0.2)`},
-            ${`hsla(200, 62%, ` + mix(12, 33, easeOutQuad(depth)) + `%, 0)`}
-          );
-        }
       `}</style>
       <style jsx>{`
         .tree {
           --trunk-height: ${trunkHeight};
+          --shadow-trunk-height: calc(
+            var(--trunk-height) * calc(1 - var(--depth))
+          );
           --trunk-width: ${trunkWidth};
           --crown-width: ${crownWidth};
           --crown-height: ${crownHeight};
@@ -104,6 +89,7 @@ export const Tree = ({ depth, zIndex, left }) => {
           transform-origin: 50% 100%;
           top: var(--scene-horizon);
           transform-style: preserve-3d;
+          left: calc(100% * var(--offset));
           backface-visibility: hidden;
         }
 
@@ -115,8 +101,8 @@ export const Tree = ({ depth, zIndex, left }) => {
           width: var(--trunk-width);
           height: calc(var(--trunk-height) + calc(var(--crown-height) / 2));
           clip-path: polygon(
-            10% 0%,
-            90% 0%,
+            15% 0%,
+            85% 0%,
             100% var(--clip-offset),
             50% 100%,
             0% var(--clip-offset)
@@ -138,15 +124,76 @@ export const Tree = ({ depth, zIndex, left }) => {
         }
 
         .shadow {
+          --shadow-trunk-height: calc(var(--trunk-height) / 2);
+          --shadow-color: ${`hsla(` +
+            mix(200, 140, easeOutQuad(depth)) +
+            `, ` +
+            mix(75, 30, easeOutQuad(depth)) +
+            `%, ` +
+            mix(10, 45, easeOutQuad(depth)) +
+            `%, 1)`};
+          --shadow-skew: calc(
+            85deg -
+              calc(
+                170deg *
+                  max(
+                    min(
+                      calc(
+                        calc(calc(var(--sun-offset) - var(--offset)) + 1) / 2
+                      ),
+                      1
+                    ),
+                    0
+                  )
+              )
+          );
+
           position: absolute;
-          transform-origin: 50% 95%;
+          transform-style: preserve-3d;
+          bottom: 2px;
+          left: 50%;
+          width: var(--crown-width);
+          height: calc(var(--crown-height) + var(--shadow-trunk-height));
+          transform-origin: 50% 100%;
+          transform: scale3d(1, calc(1 - var(--depth)), 1)
+            skew(var(--shadow-skew)) translate3d(-50%, calc(100% - 2px), -2px);
+          opacity: ${1 - easeOutQuad(depth)};
+          mask-image: linear-gradient(
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 1) 3px,
+            rgba(0, 0, 0, 0.2),
+            transparent
+          );
+        }
+
+        .shadowTrunk {
+          --clip-offset: calc(100% - 2px);
+
+          position: absolute;
+          display: block;
+          width: var(--trunk-width);
+          transform-origin: 50% 0;
+          height: calc(
+            var(--shadow-trunk-height) + calc(var(--crown-height) / 2)
+          );
+          top: 0;
+          left: 50%;
+          transform: translate3d(-50%, 0, 0px);
+          backface-visibility: hidden;
+          background: var(--shadow-color);
+        }
+
+        .shadowCrown {
+          display: block;
+          position: absolute;
           bottom: 0;
-          left: 0;
-          width: calc(var(--crown-width) * 0.75);
-          transform: translate3d(-50%, 0, 0px) rotate3d(-1, 0, 0, 90deg)
-            scale3d(2, 2, 1);
+          left: 50%;
+          transform-origin: 50% calc(var(--shadow-trunk-height) * -1);
+          width: var(--crown-width);
+          height: var(--crown-height);
           border-radius: 100%;
-          opacity: var(--shadow-opacity);
+          transform: translate3d(-50%, 0, 1px);
+          background: var(--shadow-color);
         }
       `}</style>
     </>

@@ -30,7 +30,7 @@ export const Forest = () => {
 
   React.useEffect(() => {
     if (!windowSize) return
-    setNumberOfObject(Math.min(windowSize.width / 10, 1000))
+    setNumberOfObject(Math.min(windowSize.width / 8, 1000))
   }, [windowSize])
 
   const objectOptions = [Tree, Tree, Tree, Rock]
@@ -53,9 +53,9 @@ export const Forest = () => {
 
 const generateObject = ({ objectOptions }) => {
   const offsetTop = Math.random()
-  const left = Math.round(mix(-0.1, 1.1, Math.random()) * 1000) / 10 + `%`
+  const left = mix(-0.4, 1.4, Math.random())
   const zIndex =
-    Math.round(mix(0, 500, easeInSin(offsetTop)) * 1000) / 1000 + 'px'
+    Math.round(mix(-200, 520, easeInSin(offsetTop)) * 1000) / 1000 + 'px'
   const depth = Math.round((1 - offsetTop) * 100) / 100
   const Component = randomFromArray(objectOptions)
 

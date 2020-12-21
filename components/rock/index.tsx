@@ -18,15 +18,12 @@ export const Rock = ({ depth, zIndex, left }) => {
       <style jsx>{`
         .rock {
           --depth: ${depth};
+          --offset: ${left};
           --shadow-opacity: ${Math.round(Math.max(mix(1, -1, depth), 0) * 100) /
             100};
-          transform: translate3d(
-              calc(-1px * var(--player-position)),
-              -100%,
-              ${zIndex}
-            )
+          transform: translate3d(0, -100%, ${zIndex})
             scale3d(${rockWidth}, ${rockHeight}, 1);
-          left: ${left};
+          left: calc(100% * var(--offset));
           position: absolute;
           transform-origin: 50% 100%;
           top: var(--scene-horizon);
@@ -46,23 +43,47 @@ export const Rock = ({ depth, zIndex, left }) => {
         }
 
         .shadow {
-          transform: translate3d(0%, 0, 0) rotate3d(-1, 0, 0, 90deg)
-            scale3d(1, 1, 1);
-          left: 0;
-          bottom: 1px;
-          background: linear-gradient(
-            to top,
-            ${`hsla(200, 62%, ` + mix(17, 33, depth) + `%, 0.4)`},
-            ${`hsla(200, 62%, ` + mix(17, 33, depth) + `%, 0.15)`},
-            ${`hsla(200, 62%, ` + mix(17, 33, depth) + `%, 0)`}
+          --shadow-skew: calc(
+            85deg -
+              calc(
+                170deg *
+                  max(
+                    min(
+                      calc(
+                        calc(calc(var(--sun-offset) - var(--offset)) + 1) / 2
+                      ),
+                      1
+                    ),
+                    0
+                  )
+              )
           );
-          transform-origin: 50% 100%;
+          --shadow-color: ${`hsla(` +
+            mix(200, 140, easeOutQuad(depth)) +
+            `, ` +
+            mix(75, 30, easeOutQuad(depth)) +
+            `%, ` +
+            mix(10, 45, easeOutQuad(depth)) +
+            `%, 1)`};
+
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          background: var(--shadow-color);
+          transform-origin: 50% 0%;
           transform-style: preserve-3d;
+          transform: translate3d(0%, 100%, 0) skew(var(--shadow-skew))
+            scale3d(1, calc(1 - var(--depth)), 1);
           display: block;
-          width: 50px;
-          height: 25px;
-          border-radius: 500px 500px 0 0;
-          opacity: ${1 - depth};
+          width: 100%;
+          height: 100%;
+          border-radius: 0 0 500px 500px;
+          opacity: ${1 - easeOutQuad(depth)};
+          mask-image: linear-gradient(
+            rgba(0, 0, 0, 1) 3px,
+            rgba(0, 0, 0, 0.2),
+            transparent
+          );
         }
       `}</style>
     </>

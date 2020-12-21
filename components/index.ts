@@ -1,3 +1,4 @@
+export * from './camera'
 export * from './cloud'
 export * from './globalStyles'
 export * from './tree'

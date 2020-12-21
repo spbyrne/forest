@@ -18,11 +18,7 @@ export const Cloud = ({ depth, zIndex, left }) => {
           --depth: ${depth};
           --shadow-opacity: ${Math.round(Math.max(mix(1, -1, depth), 0) * 100) /
             100};
-          transform: translate3d(
-              calc(-1px * var(--player-position)),
-              -100%,
-              ${zIndex}
-            )
+          transform: translate3d(0, -100%, ${zIndex})
             scale3d(${cloudWidth}, ${cloudHeight}, 1);
           left: ${left};
           position: absolute;

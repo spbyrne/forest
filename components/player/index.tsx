@@ -1,6 +1,5 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { mix } from '@/util'
 
 export const Player = ({}) => {
   return (
@@ -63,8 +62,8 @@ export const Player = ({}) => {
             position: absolute;
             top: 0;
             left: 50%;
-            width: 6px;
-            height: 6px;
+            width: calc(var(--head-size) / 3.5);
+            height: calc(var(--head-size) / 3.5);
             border-radius: 100% 100% 0 0;
             mask-image: linear-gradient(
               to bottom,

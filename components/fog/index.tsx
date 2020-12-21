@@ -20,6 +20,7 @@ export const Fog = ({ density = 0.2 }) => {
           left:50%;
           width:100%;
           height:50%;
+          pointer-events: none;
           transform-origin: 50% 100%;
           transform: translate3d(-50%,-100%,100px) scale3d(2,2,1);
           backface-visibility: hidden;
