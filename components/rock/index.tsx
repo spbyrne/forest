@@ -79,10 +79,11 @@ export const Rock = ({ depth, zIndex, left }) => {
           height: 100%;
           border-radius: 0 0 500px 500px;
           opacity: ${1 - easeOutQuad(depth)};
-          mask-image: linear-gradient(
-            rgba(0, 0, 0, 1) 3px,
-            rgba(0, 0, 0, 0.2),
-            transparent
+          mask-image: radial-gradient(
+            farthest-corner at 50% 0,
+            rgba(0, 0, 0, 1),
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0)
           );
         }
       `}</style>

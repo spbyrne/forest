@@ -69,7 +69,7 @@ export const Player = ({}) => {
               to bottom,
               white,
               white 80%,
-              transparent
+              rgba(255, 255, 255, 0)
             );
             background: hsl(31, 60, 20);
             box-shadow: inset 0 2px 4px -1px hsl(31, 30, 40);

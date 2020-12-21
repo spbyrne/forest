@@ -21,7 +21,7 @@ function Index(props) {
           top: -25%;
           width: 150%;
           height: 150%;
-          background: radial-gradient(ellipse,transparent,transparent,hsl(205,86%,18%));
+          background: radial-gradient(ellipse,hsla(205,86%,18%,0),hsla(205,86%,18%,0),hsl(205,86%,18%));
           pointer-events: none;
         }
       `}</style>
