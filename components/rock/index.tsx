@@ -3,11 +3,12 @@ import * as _ from 'underscore'
 import { mix, easeOutQuad, easeOutExpo } from '@/util'
 
 export const Rock = ({ depth, zIndex, left }) => {
-  const { rockWidth, rockHeight } = React.useMemo(() => {
+  const { rockWidth, rockHeight, animationDelay } = React.useMemo(() => {
     const rockWidth = Math.round(mix(0.5, 2, Math.random()) * 100) / 100
     const rockHeight = Math.round(mix(0.75, 1.25, Math.random()) * 100) / 100
+    const animationDelay = Math.round(Math.random() * 300) / 10
 
-    return { rockWidth, rockHeight }
+    return { rockWidth, rockHeight, animationDelay }
   }, [])
 
   return (
@@ -16,6 +17,32 @@ export const Rock = ({ depth, zIndex, left }) => {
         <div className="shadow"></div>
       </div>
       <style jsx>{`
+        @keyframes load {
+          0% {
+            transform: translate3d(0, -1000px, ${zIndex});
+          }
+          100% {
+            transform: translate3d(0, 0, ${zIndex});
+          }
+        }
+
+        @keyframes loadShadow {
+          0% {
+            opacity: 0;
+            transform: translate3d(0%, 1000px, 0) skew(var(--shadow-skew))
+              scale3d(1, calc(1 - var(--depth)), 1);
+          }
+          50% {
+            opacity: 0;
+            transform: translate3d(0%, 1000px, 0) skew(var(--shadow-skew))
+              scale3d(1, calc(1 - var(--depth)), 1);
+          }
+          100% {
+            transform: translate3d(0%, 100%, 0) skew(var(--shadow-skew))
+              scale3d(1, calc(1 - var(--depth)), 1);
+          }
+        }
+
         .rock {
           --depth: ${depth};
           --offset: ${left};
@@ -40,6 +67,13 @@ export const Rock = ({ depth, zIndex, left }) => {
             `%)`};
           box-shadow: inset 0 1rem 1.5rem -1rem ${`hsl(30, 12%, ` + mix(35, 90, easeOutExpo(depth)) + `%)`};
           transform-origin: 50% 100%;
+
+          animation-name: load;
+          animation-duration: 10s;
+          animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+          animation-iteration-count: 1;
+          animation-fill-mode: both;
+          animation-delay: ${animationDelay + `s`};
         }
 
         .shadow {
@@ -86,6 +120,13 @@ export const Rock = ({ depth, zIndex, left }) => {
             rgba(0, 0, 0, 0.1),
             rgba(0, 0, 0, 0)
           );
+
+          animation-name: loadShadow;
+          animation-duration: 10s;
+          animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+          animation-iteration-count: 1;
+          animation-fill-mode: both;
+          animation-delay: ${animationDelay + `s`};
         }
       `}</style>
     </>

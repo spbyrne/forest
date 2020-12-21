@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { mix, easeOutQuad } from '@/util'
+import { mix, easeOutQuad, randomFromArray, classNames } from '@/util'
 
 export const Tree = ({ depth, zIndex, left }) => {
   const {
@@ -8,18 +8,31 @@ export const Tree = ({ depth, zIndex, left }) => {
     trunkWidth,
     crownHeight,
     crownWidth,
+    treeType,
+    animationDelay,
   } = React.useMemo(() => {
+    const treeType = randomFromArray(['pine', 'maple', 'willow'])
     const trunkHeight = Math.round(mix(8, 48, Math.random())) + `px`
     const trunkWidth = Math.round(mix(8, 24, Math.random())) + `px`
     const crownHeight = Math.round(mix(48, 140, Math.random())) + `px`
     const crownWidth = Math.round(mix(32, 120, Math.random())) + `px`
+    const animationDelay = Math.round(Math.random() * 300) / 10
 
-    return { trunkHeight, trunkWidth, crownHeight, crownWidth }
+    return {
+      trunkHeight,
+      trunkWidth,
+      crownHeight,
+      crownWidth,
+      treeType,
+      animationDelay,
+    }
   }, [])
+
+  const treeClass = classNames('tree')
 
   return (
     <>
-      <div className="tree">
+      <div className={treeClass}>
         <span className="trunk"></span>
         <span className="crown"></span>
         <div className="shadow">
@@ -28,6 +41,15 @@ export const Tree = ({ depth, zIndex, left }) => {
         </div>
       </div>
       <style jsx>{`
+        @keyframes load {
+          0% {
+            transform: translate3d(0, -1000px, ${zIndex});
+          }
+          100% {
+            transform: translate3d(0, 0, ${zIndex});
+          }
+        }
+
         .tree {
           --offset: ${left};
           --depth: ${depth};
@@ -35,6 +57,13 @@ export const Tree = ({ depth, zIndex, left }) => {
             Math.max(mix(1, -0.5, depth), 0) * 100
           ) / 100};
           transform: translate3d(0, 0, ${zIndex});
+
+          animation-name: load;
+          animation-duration: 10s;
+          animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+          animation-iteration-count: 1;
+          animation-fill-mode: both;
+          animation-delay: ${animationDelay + `s`};
         }
 
         .trunk {
@@ -76,6 +105,23 @@ export const Tree = ({ depth, zIndex, left }) => {
         }
       `}</style>
       <style jsx>{`
+        @keyframes loadShadow {
+          0% {
+            opacity: 0;
+            transform: scale3d(1, calc(1 - var(--depth)), 1)
+              skew(var(--shadow-skew)) translate3d(-50%, 1000px, -1px);
+          }
+          50% {
+            opacity: 0;
+            transform: scale3d(1, calc(1 - var(--depth)), 1)
+              skew(var(--shadow-skew)) translate3d(-50%, 1000px, -1px);
+          }
+          100% {
+            transform: scale3d(1, calc(1 - var(--depth)), 1)
+              skew(var(--shadow-skew)) translate3d(-50%, 100%, -1px);
+          }
+        }
+
         .tree {
           --trunk-height: ${trunkHeight};
           --shadow-trunk-height: calc(
@@ -165,6 +211,13 @@ export const Tree = ({ depth, zIndex, left }) => {
             rgba(0, 0, 0, 0.3),
             rgba(0, 0, 0, 0)
           );
+
+          animation-name: loadShadow;
+          animation-duration: 10s;
+          animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+          animation-iteration-count: 1;
+          animation-fill-mode: both;
+          animation-delay: ${animationDelay + `s`};
         }
 
         .shadowTrunk {
@@ -195,6 +248,26 @@ export const Tree = ({ depth, zIndex, left }) => {
           border-radius: 100%;
           transform: translate3d(-50%, 0, 0);
           background: var(--shadow-color);
+        }
+
+        .maple {
+          .crown {
+            border-radius: 100%;
+          }
+        }
+
+        .willow {
+          .crown {
+            border-radius: 100% 100% 50% 50%;
+          }
+        }
+
+        .pine {
+          .crown {
+            border-radius: 0;
+            clip-path: polygon(50% 0%, 100% 100%, 0 100%);
+            height: calc(var(--crown-height) * 0.8);
+          }
         }
       `}</style>
     </>
