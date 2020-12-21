@@ -82,7 +82,8 @@ export const Rock = ({ depth, zIndex, left }) => {
           mask-image: radial-gradient(
             farthest-corner at 50% 0,
             rgba(0, 0, 0, 1),
-            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.1),
             rgba(0, 0, 0, 0)
           );
         }

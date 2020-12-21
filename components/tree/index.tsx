@@ -156,7 +156,8 @@ export const Tree = ({ depth, zIndex, left }) => {
           height: calc(var(--crown-height) + var(--shadow-trunk-height));
           transform-origin: 50% 100%;
           transform: scale3d(1, calc(1 - var(--depth)), 1)
-            skew(var(--shadow-skew)) translate3d(-50%, 100%, -2px);
+            skew(var(--shadow-skew)) translate3d(-50%, 100%, -1px);
+          z-index: -2;
           opacity: ${1 - easeOutQuad(depth)};
           mask-image: radial-gradient(
             farthest-corner at 50% 0,
@@ -192,7 +193,7 @@ export const Tree = ({ depth, zIndex, left }) => {
           width: var(--crown-width);
           height: var(--crown-height);
           border-radius: 100%;
-          transform: translate3d(-50%, 0, 1px);
+          transform: translate3d(-50%, 0, 0);
           background: var(--shadow-color);
         }
       `}</style>
