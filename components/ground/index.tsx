@@ -8,12 +8,12 @@ export const Ground = ({}) => {
         .ground {
           display: block;
           position: absolute;
-          top:33%;
+          top:30%;
           left:50%;
           width:140%;
-          height:75%;
+          height:80%;
           transform-origin: 50% 0;
-          transform: translate3d(-50%,0,-500px) scale3d(2,2,1);
+          transform: translate3d(-50%,0,-300px) scale3d(2,2,1);
           backface-visibility: hidden;
           background: linear-gradient(
             to bottom,

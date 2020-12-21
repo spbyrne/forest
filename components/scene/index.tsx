@@ -7,11 +7,11 @@ export const Scene = ({
 }) => {
   return (
     <>
-      <div className="scene sun-test">{children}</div>
+      <div className="scene animated-scene">{children}</div>
       <style>{`
       
         .scene {
-          --scene-horizon: 30%;
+          --scene-horizon: 33%;
           --sun-offset: ${sunOffset};
 
           transform-style: preserve-3d;
@@ -20,17 +20,26 @@ export const Scene = ({
           display: block;
           width: 100%;
           height: 100%;
-          transform: translate3d(-50%, 150px,-150px);
+          transform: translate3d(-50%,150px,-150px);
           overflow: visible;
           backface-visibility: hidden;
         }
 
-        @keyframes animatedScene {
+        @keyframes animatedScene- {
           0% {
             transform: translate3d(-50%,50px,200px);
           }
           100% {
             transform: translate3d(-50%, 450px, -400px);  
+          }
+        }
+
+        @keyframes animatedScene- {
+          0% {
+            transform: translate3d(-50%,0px,-150px);
+          }
+          100% {
+            transform: translate3d(-50%,600px,-150px);
           }
         }
 

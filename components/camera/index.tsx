@@ -9,7 +9,7 @@ export const Camera = ({ children }) => {
           display: block;
           position: absolute;
           perspective: 500px;
-          perspective-origin: 50% 25%;
+          perspective-origin: 50% 33%;
           transform-style: preserve-3d;
           width: 100%;
           height: 100%;
