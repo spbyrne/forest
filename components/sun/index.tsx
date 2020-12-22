@@ -2,6 +2,12 @@ import * as React from 'react'
 import { mix } from '@/util'
 
 export const Sun = ({ left = 0.3 }) => {
+  const { top } = React.useMemo(() => {
+    const top = Math.round(mix(-70, -10, Math.random())) + `%`
+
+    return { top }
+  }, [])
+
   return (
     <>
       <div className="sun"></div>
@@ -11,7 +17,7 @@ export const Sun = ({ left = 0.3 }) => {
 
           display: block;
           position: absolute;
-          top: -30%;
+          top: ${top};
           left: calc(-100% + calc(300% * var(--offset)));
           width: calc(8vh + 8vw);
           height: calc(8vh + 8vw);

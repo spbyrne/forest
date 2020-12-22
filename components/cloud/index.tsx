@@ -28,7 +28,12 @@ export const Cloud = ({}) => {
     let numberOfPuffs = randomFromArray([3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 2, 2, 1])
     let zIndex =
       randBias({ min: -2000, max: -400, bias: 200, wholeNumber: true }) + 'px'
-    let offsetTop = randBias({ min: 0, max: 1, bias: Math.random() })
+    let offsetTop = randBias({
+      min: 0,
+      max: 1,
+      bias: Math.random(),
+      easingFunction: easeOutQuad,
+    })
     let depth = Math.round((1 - offsetTop) * 100) / 100
     let leftOffset = Math.round(mix(-2, 3, Math.random()) * 100) + `%`
     let offset = Math.round(mix(-1.75, 1, offsetTop) * 100) / 100
@@ -100,6 +105,7 @@ export const Cloud = ({}) => {
         .puff {
           position: absolute;
           top: 0;
+          left: 50%;
           width: 100%;
           height: 100%;
           border-radius: 500px;
@@ -123,7 +129,7 @@ export const Cloud = ({}) => {
 
         .puff--center {
           transform: scale3d(${puffOneWidth}, ${puffOneHeight}, 1)
-            skew(var(--cloud-skew)) translate3d(0, -70%, 0);
+            skew(var(--cloud-skew)) translate3d(-50%, -70%, 0);
           background: radial-gradient(
               farthest-side at 50% 15%,
               hsla(58, 90%, 97%, 0.9),
@@ -141,23 +147,21 @@ export const Cloud = ({}) => {
         }
 
         .puff--left {
-          left: 0%;
           transform: scale3d(${puffTwoWidth}, ${puffTwoHeight}, 1)
-            skew(var(--cloud-skew)) translate3d(-55%, -70%, 0);
+            skew(var(--cloud-skew)) translate3d(calc(-50% - 150px), -70%, 0);
           mask-image: linear-gradient(
             to right,
-            hsla(0, 0, 0, 1) 70%,
+            hsla(0, 0, 0, 1) 60%,
             hsla(0, 0, 0, 0) 95%
           );
         }
 
         .puff--right {
-          right: 0;
           transform: scale3d(${puffThreeWidth}, ${puffThreeHeight}, 1)
-            skew(var(--cloud-skew)) translate3d(55%, -70%, 0);
+            skew(var(--cloud-skew)) translate3d(calc(-50% + 150px), -70%, 0);
           mask-image: linear-gradient(
             to left,
-            hsla(0, 0, 0, 1) 70%,
+            hsla(0, 0, 0, 1) 60%,
             hsla(0, 0, 0, 0) 95%
           );
         }
