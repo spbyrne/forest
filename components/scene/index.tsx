@@ -3,6 +3,7 @@ import { randomFromArray } from '@/util'
 
 export const Scene = ({
   sunOffset = randomFromArray([0.3, 0.7, 0.25, 0.5, 0.75, 0.2, 0.4, 0.6, 0.8]),
+  zoom = Math.random(),
   children,
 }) => {
   return (
@@ -11,6 +12,7 @@ export const Scene = ({
       <style>{`
       
         .scene {
+          --zoom: ${zoom};
           --scene-horizon: 33%;
           --sun-offset: ${sunOffset};
 
@@ -20,7 +22,7 @@ export const Scene = ({
           display: block;
           width: 100%;
           height: 100%;
-          transform: translate3d(-50%,150px,-150px);
+          transform: translate3d(-50%,calc(50px + calc(150px * var(--zoom,0.5))),calc(-50px - calc(200px * var(--zoom,0.5)))) rotate3d(1,0,0,calc(0deg - calc(9deg * var(--zoom,0.5))));
           overflow: visible;
           backface-visibility: hidden;
         }

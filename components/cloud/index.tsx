@@ -1,42 +1,162 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { mix, easeOutQuad, easeOutExpo } from '@/util'
+import {
+  mix,
+  easeOutQuad,
+  easeOutExpo,
+  randBias,
+  randomFromArray,
+} from '@/util'
 
-export const Cloud = ({ depth, zIndex, left }) => {
-  const { cloudWidth, cloudHeight } = React.useMemo(() => {
-    const cloudWidth = Math.round(mix(0.5, 2, Math.random()) * 100) / 100
-    const cloudHeight = Math.round(mix(0.75, 1.25, Math.random()) * 100) / 100
+export const Cloud = ({}) => {
+  const {
+    numberOfPuffs,
+    puffOneHeight,
+    puffTwoHeight,
+    puffThreeHeight,
+    puffOneWidth,
+    puffTwoWidth,
+    puffThreeWidth,
+    cloudSkew,
+    height,
+    depth,
+    offset,
+    leftOffset,
+    zIndex,
+  } = React.useMemo(() => {
+    let numberOfPuffs = randomFromArray([3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 2, 2, 1])
+    let offsetTop = randBias({ min: 0, max: 1, bias: 0.5 })
+    let depth = Math.round((1 - offsetTop) * 100) / 100
+    let leftOffset = Math.round(mix(-2, 3, Math.random()) * 100) + `%`
+    let offset = Math.round(mix(-1.75, 1, offsetTop) * 100) / 100
+    let zIndex =
+      randBias({ min: -2000, max: -400, bias: 200, wholeNumber: true }) + 'px'
+    let puffOneHeight = mix(1.375, 2.5, Math.random())
+    let puffTwoHeight = mix(0.75, 1.25, Math.random())
+    let puffThreeHeight = mix(0.75, 1.25, Math.random())
+    let puffOneWidth = mix(1, 2, Math.random())
+    let puffTwoWidth = mix(1, 2, Math.random())
+    let puffThreeWidth = mix(1, 2, Math.random())
+    let cloudSkew =
+      randBias({
+        min: -30,
+        max: 30,
+        bias: 20,
+        easingFunction: easeOutQuad,
+      }) + `deg`
+    let height = randBias({ min: 0.5, max: 3, bias: 1 })
 
-    return { cloudWidth, cloudHeight }
+    // leftOffset = '50%'
+    // offsetTop = 0.9
+    // zIndex = '-2000px'
+
+    return {
+      numberOfPuffs,
+      puffOneHeight,
+      puffTwoHeight,
+      puffThreeHeight,
+      puffOneWidth,
+      puffTwoWidth,
+      puffThreeWidth,
+      cloudSkew,
+      height,
+      depth,
+      offset,
+      leftOffset,
+      zIndex,
+    }
   }, [])
 
   return (
     <>
-      <div className="cloud"></div>
+      <div className="cloud">
+        <div className="puff"></div>
+        {numberOfPuffs > 1 && <div className="puff"></div>}
+        {numberOfPuffs > 2 && <div className="puff"></div>}
+      </div>
       <style jsx>{`
         .cloud {
-          --depth: ${depth};
-          --shadow-opacity: ${Math.round(Math.max(mix(1, -1, depth), 0) * 100) /
-            100};
-          transform: translate3d(0, -100%, ${zIndex})
-            scale3d(${cloudWidth}, ${cloudHeight}, 1);
-          left: ${left};
+          --offset: ${offset};
+          --left-offset: ${leftOffset};
+          --z-index: ${zIndex};
+          --cloud-skew: ${cloudSkew};
+
+          transform-origin: 50%, 100%;
+          transform: scale3d(2, ${height}, 1) translate3d(0, 0, var(--z-index));
           position: absolute;
-          transform-origin: 50% 100%;
-          top: var(--scene-horizon);
+          top: calc(var(--scene-horizon) * var(--offset));
+          left: var(--left-offset);
           transform-style: preserve-3d;
           backface-visibility: hidden;
           display: block;
-          width: 50px;
-          height: 25px;
-          border-radius: 500px 500px 0 0;
-          background: ${`hsl(22, ` +
-            mix(4, 12, depth) +
-            `%, ` +
-            mix(14, 73, easeOutQuad(depth)) +
-            `%)`};
-          box-shadow: inset 0 1rem 1.5rem -1rem ${`hsl(30, 12%, ` + mix(35, 90, easeOutExpo(depth)) + `%)`};
-          transform-origin: 50% 100%;
+          width: 300px;
+          height: 300px;
+        }
+
+        .puff {
+          position: absolute;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 500px;
+          background: radial-gradient(
+              farthest-side at 50% 15%,
+              hsla(58, 90%, 97%, 0.8),
+              transparent 50%
+            ),
+            linear-gradient(
+              to top,
+              hsla(210, 60%, 40%, 0) 30%,
+              hsla(210, 70%, 88%, 0.8) 50%,
+              hsla(210, 70%, 88%, 0.7) 70%,
+              hsla(58, 90%, 97%, 0.3) 100%
+            );
+          background-size: 300% 100%;
+          background-position: center top;
+          /* box-shadow: inset 0 -250px 150px -150px hsla(209, 60%, 50%, 0.5); */
+          transform-origin: 50% 0%;
+          clip-path: inset(0 0 30% 0);
+
+          &:nth-child(1) {
+            transform: scale3d(${puffOneWidth}, ${puffOneHeight}, 1)
+              skew(var(--cloud-skew)) translate3d(0, -70%, 0);
+            background: radial-gradient(
+                farthest-side at 50% 15%,
+                hsla(58, 90%, 97%, 0.9),
+                transparent 50%
+              ),
+              linear-gradient(
+                to top,
+                hsla(210, 60%, 40%, 0) 30%,
+                hsla(210, 70%, 88%, 0.8) 40%,
+                hsla(210, 70%, 88%, 0.7) 50%,
+                hsla(58, 90%, 97%, 0.3) 100%
+              );
+            background-size: 300% 100%;
+            background-position: center top;
+          }
+
+          &:nth-child(2) {
+            left: 0%;
+            transform: scale3d(${puffTwoWidth}, ${puffTwoHeight}, 1)
+              skew(var(--cloud-skew)) translate3d(-60%, -70%, 0);
+            mask-image: linear-gradient(
+              to right,
+              hsla(0, 0, 0, 1) 70%,
+              hsla(0, 0, 0, 0) 90%
+            );
+          }
+
+          &:nth-child(3) {
+            right: 0;
+            transform: scale3d(${puffThreeWidth}, ${puffThreeHeight}, 1)
+              skew(var(--cloud-skew)) translate3d(60%, -70%, 0);
+            mask-image: linear-gradient(
+              to left,
+              hsla(0, 0, 0, 1) 70%,
+              hsla(0, 0, 0, 0) 90%
+            );
+          }
         }
       `}</style>
     </>

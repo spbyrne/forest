@@ -1,11 +1,19 @@
 import * as React from 'react'
-import { Forest, Ground, Camera, Scene, Sun, Fog } from '../components'
+import { Forest, Ground, Cloud, Camera, Scene, Sun, Fog } from '../components'
 
 function Index(props) {
   return (
     <>
       <Camera>
         <Scene>
+          <Cloud />
+          <Cloud />
+          <Cloud />
+          <Cloud />
+          <Cloud />
+          <Cloud />
+          <Cloud />
+          <Cloud />
           <Sun />
           <Fog />
           <Forest />
