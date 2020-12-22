@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { mix, easeOutQuad } from '@/util'
+import { mix, easeOutQuad, easeInSin, easeInQuad } from '@/util'
 
 export const Tree = ({ depth, zIndex, left }) => {
   const {
@@ -50,18 +50,18 @@ export const Tree = ({ depth, zIndex, left }) => {
           background: linear-gradient(
             to bottom,
             ${`hsl(` +
-              mix(110, 50, easeOutQuad(depth)) +
+              mix(130, 60, depth) +
               `, ` +
-              mix(60, 30, easeOutQuad(depth)) +
+              mix(90, 20, depth) +
               `%, ` +
-              mix(15, 70, easeOutQuad(depth)) +
+              mix(15, 88, easeInSin(depth)) +
               `%)`},
             ${`hsl(` +
-              mix(130, 130, easeOutQuad(depth)) +
+              mix(200, 130, depth) +
               `, ` +
-              mix(60, 24, easeOutQuad(depth)) +
+              mix(65, 20, depth) +
               `%, ` +
-              mix(15, 65, easeOutQuad(depth)) +
+              mix(15, 65, easeInSin(depth)) +
               `%)`}
           );
           box-shadow: inset 0 -4rem 3rem -2rem
@@ -72,7 +72,7 @@ export const Tree = ({ depth, zIndex, left }) => {
                 `%, ` +
                 (1 - easeOutQuad(depth)) +
                 `)`},
-            inset 0 3rem 4rem -2rem ${`hsla(58, 60%, 93%, ` + easeOutQuad(depth - 0.3) + `)`};
+            inset 0 2rem 3rem -1rem ${`hsla(58, 60%, 93%, ` + Math.max(depth - 0.3, 0.3) + `)`};
         }
       `}</style>
       <style jsx>{`

@@ -70,9 +70,9 @@ export const Cloud = ({}) => {
   return (
     <>
       <div className="cloud">
-        <div className="puff"></div>
-        {numberOfPuffs > 1 && <div className="puff"></div>}
-        {numberOfPuffs > 2 && <div className="puff"></div>}
+        <div className="puff puff--center"></div>
+        {numberOfPuffs > 1 && <div className="puff puff--left"></div>}
+        {numberOfPuffs > 2 && <div className="puff puff--right"></div>}
       </div>
       <style jsx>{`
         .cloud {
@@ -116,47 +116,47 @@ export const Cloud = ({}) => {
           /* box-shadow: inset 0 -250px 150px -150px hsla(209, 60%, 50%, 0.5); */
           transform-origin: 50% 0%;
           clip-path: inset(0 0 30% 0);
+        }
 
-          &:nth-child(1) {
-            transform: scale3d(${puffOneWidth}, ${puffOneHeight}, 1)
-              skew(var(--cloud-skew)) translate3d(0, -70%, 0);
-            background: radial-gradient(
-                farthest-side at 50% 15%,
-                hsla(58, 90%, 97%, 0.9),
-                transparent 50%
-              ),
-              linear-gradient(
-                to top,
-                hsla(210, 60%, 40%, 0) 30%,
-                hsla(210, 70%, 88%, 0.8) 40%,
-                hsla(210, 70%, 88%, 0.7) 50%,
-                hsla(58, 90%, 97%, 0.3) 100%
-              );
-            background-size: 300% 100%;
-            background-position: center top;
-          }
-
-          &:nth-child(2) {
-            left: 0%;
-            transform: scale3d(${puffTwoWidth}, ${puffTwoHeight}, 1)
-              skew(var(--cloud-skew)) translate3d(-60%, -70%, 0);
-            mask-image: linear-gradient(
-              to right,
-              hsla(0, 0, 0, 1) 70%,
-              hsla(0, 0, 0, 0) 90%
+        .puff--center {
+          transform: scale3d(${puffOneWidth}, ${puffOneHeight}, 1)
+            skew(var(--cloud-skew)) translate3d(0, -70%, 0);
+          background: radial-gradient(
+              farthest-side at 50% 15%,
+              hsla(58, 90%, 97%, 0.9),
+              transparent 50%
+            ),
+            linear-gradient(
+              to top,
+              hsla(210, 60%, 40%, 0) 30%,
+              hsla(210, 70%, 88%, 0.8) 40%,
+              hsla(210, 70%, 88%, 0.7) 50%,
+              hsla(58, 90%, 97%, 0.3) 100%
             );
-          }
+          background-size: 300% 100%;
+          background-position: center top;
+        }
 
-          &:nth-child(3) {
-            right: 0;
-            transform: scale3d(${puffThreeWidth}, ${puffThreeHeight}, 1)
-              skew(var(--cloud-skew)) translate3d(60%, -70%, 0);
-            mask-image: linear-gradient(
-              to left,
-              hsla(0, 0, 0, 1) 70%,
-              hsla(0, 0, 0, 0) 90%
-            );
-          }
+        .puff--left {
+          left: 0%;
+          transform: scale3d(${puffTwoWidth}, ${puffTwoHeight}, 1)
+            skew(var(--cloud-skew)) translate3d(-60%, -70%, 0);
+          mask-image: linear-gradient(
+            to right,
+            hsla(0, 0, 0, 1) 70%,
+            hsla(0, 0, 0, 0) 95%
+          );
+        }
+
+        .puff--right {
+          right: 0;
+          transform: scale3d(${puffThreeWidth}, ${puffThreeHeight}, 1)
+            skew(var(--cloud-skew)) translate3d(60%, -70%, 0);
+          mask-image: linear-gradient(
+            to left,
+            hsla(0, 0, 0, 1) 70%,
+            hsla(0, 0, 0, 0) 95%
+          );
         }
       `}</style>
     </>
