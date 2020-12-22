@@ -18,6 +18,7 @@ export const Cloud = ({}) => {
     puffTwoWidth,
     puffThreeWidth,
     cloudSkew,
+    width,
     height,
     depth,
     offset,
@@ -25,15 +26,15 @@ export const Cloud = ({}) => {
     zIndex,
   } = React.useMemo(() => {
     let numberOfPuffs = randomFromArray([3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 2, 2, 1])
-    let offsetTop = randBias({ min: 0, max: 1, bias: 0.5 })
+    let zIndex =
+      randBias({ min: -2000, max: -400, bias: 200, wholeNumber: true }) + 'px'
+    let offsetTop = randBias({ min: 0, max: 1, bias: Math.random() })
     let depth = Math.round((1 - offsetTop) * 100) / 100
     let leftOffset = Math.round(mix(-2, 3, Math.random()) * 100) + `%`
     let offset = Math.round(mix(-1.75, 1, offsetTop) * 100) / 100
-    let zIndex =
-      randBias({ min: -2000, max: -400, bias: 200, wholeNumber: true }) + 'px'
-    let puffOneHeight = mix(1.375, 2.5, Math.random())
-    let puffTwoHeight = mix(0.75, 1.25, Math.random())
-    let puffThreeHeight = mix(0.75, 1.25, Math.random())
+    let puffOneHeight = mix(1.5, 2, Math.random())
+    let puffTwoHeight = mix(0.75, puffOneHeight, Math.random())
+    let puffThreeHeight = mix(0.75, puffOneHeight, Math.random())
     let puffOneWidth = mix(1, 2, Math.random())
     let puffTwoWidth = mix(1, 2, Math.random())
     let puffThreeWidth = mix(1, 2, Math.random())
@@ -45,6 +46,7 @@ export const Cloud = ({}) => {
         easingFunction: easeOutQuad,
       }) + `deg`
     let height = randBias({ min: 0.5, max: 3, bias: 1 })
+    let width = randBias({ min: 1, max: 3, bias: 2 })
 
     // leftOffset = '50%'
     // offsetTop = 0.9
@@ -59,6 +61,7 @@ export const Cloud = ({}) => {
       puffTwoWidth,
       puffThreeWidth,
       cloudSkew,
+      width,
       height,
       depth,
       offset,
@@ -82,7 +85,8 @@ export const Cloud = ({}) => {
           --cloud-skew: ${cloudSkew};
 
           transform-origin: 50%, 100%;
-          transform: scale3d(2, ${height}, 1) translate3d(0, 0, var(--z-index));
+          transform: scale3d(${width}, ${height}, 1)
+            translate3d(0, 0, var(--z-index));
           position: absolute;
           top: calc(var(--scene-horizon) * var(--offset));
           left: var(--left-offset);
@@ -113,7 +117,6 @@ export const Cloud = ({}) => {
             );
           background-size: 300% 100%;
           background-position: center top;
-          /* box-shadow: inset 0 -250px 150px -150px hsla(209, 60%, 50%, 0.5); */
           transform-origin: 50% 0%;
           clip-path: inset(0 0 30% 0);
         }
@@ -140,7 +143,7 @@ export const Cloud = ({}) => {
         .puff--left {
           left: 0%;
           transform: scale3d(${puffTwoWidth}, ${puffTwoHeight}, 1)
-            skew(var(--cloud-skew)) translate3d(-60%, -70%, 0);
+            skew(var(--cloud-skew)) translate3d(-55%, -70%, 0);
           mask-image: linear-gradient(
             to right,
             hsla(0, 0, 0, 1) 70%,
@@ -151,7 +154,7 @@ export const Cloud = ({}) => {
         .puff--right {
           right: 0;
           transform: scale3d(${puffThreeWidth}, ${puffThreeHeight}, 1)
-            skew(var(--cloud-skew)) translate3d(60%, -70%, 0);
+            skew(var(--cloud-skew)) translate3d(55%, -70%, 0);
           mask-image: linear-gradient(
             to left,
             hsla(0, 0, 0, 1) 70%,
