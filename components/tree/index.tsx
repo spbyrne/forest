@@ -168,7 +168,7 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
             `, ` +
             mix(75, 30, easeOutQuad(depth)) +
             `%, ` +
-            mix(10, 45, easeOutQuad(depth)) +
+            mix(8, 40, easeOutQuad(depth)) +
             `%, 1)`};
           --shadow-skew: calc(
             85deg -
@@ -196,11 +196,11 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
           transform: scale3d(1, calc(1 - var(--depth)), 1)
             skew(var(--shadow-skew)) translate3d(-50%, 100%, -1px);
           z-index: -2;
-          opacity: ${1 - easeOutQuad(depth)};
+          opacity: ${1 - depth};
           mask-image: radial-gradient(
             farthest-corner at 50% 0,
             rgba(0, 0, 0, 1),
-            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.4),
             rgba(0, 0, 0, 0)
           );
         }
