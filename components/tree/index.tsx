@@ -12,7 +12,7 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
     const trunkHeight =
       randBias({
         min: 8,
-        max: 90,
+        max: 110,
         bias: randBias({ min: 10, max: 80, bias: 60, wholeNumber: true }),
         wholeNumber: true,
       }) + `px`
@@ -130,16 +130,16 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
               mix(20, 65, easeInSin(depth)) +
               `%)`}
           );
-          box-shadow: inset var(--shadow-offset) calc(var(--crown-height) / -4)
-              calc(var(--crown-height) / 3) 0
+          box-shadow: inset var(--shadow-offset)
+              calc(var(--crown-height) / -3.5) calc(var(--crown-height) / 3) 0
               ${`hsla(` +
                 mix(200, 170, depth) +
                 `, ` +
                 mix(90, 40, easeInQuad(depth)) +
                 `%, ` +
-                mix(10, 80, easeInSin(depth)) +
+                mix(10, 70, easeInSin(depth)) +
                 `%, ` +
-                (0.9 - depth) +
+                (0.9 - easeInSin(depth)) +
                 `)`},
             inset calc(-1 * var(--shadow-offset)) calc(var(--crown-height) / 2)
               calc(var(--crown-height) / 3) calc(var(--crown-height) / -3)
@@ -151,6 +151,12 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
           border-radius: 100%;
           transform: translate3d(-50%, 0, 1px);
           backface-visibility: hidden;
+          mask-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 1),
+            rgba(0, 0, 0, 1) 80%,
+            rgba(0, 0, 0, 0.85) 100%
+          );
         }
 
         .shadow {

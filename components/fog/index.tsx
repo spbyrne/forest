@@ -1,7 +1,9 @@
 import * as React from 'react'
-import { easeInQuad } from '@/util'
+import { easeInQuad, mix } from '@/util'
 
-export const Fog = ({ density = 0.2 }) => {
+export const Fog = ({
+  density = Math.round(mix(0, 0.3, Math.random()) * 100) / 100,
+}) => {
   return (
     <>
       <div className="fog layer-one"></div>
