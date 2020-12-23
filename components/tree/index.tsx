@@ -64,21 +64,59 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
 
         .trunk {
           --clip-offset: calc(100% - 2px);
-
-          background: ${`hsl(32, ` +
-            mix(35, 10, depth) +
+          --highlight-opacity: calc(
+            0.3 +
+              calc(
+                0.7 *
+                  max(
+                    min(
+                      calc(
+                        calc(calc(var(--sun-offset) - var(--offset)) + 1) / 2
+                      ),
+                      1
+                    ),
+                    0
+                  )
+              )
+          );
+          --highlight-color: ${`hsla(` +
+            mix(40, 90, depth) +
+            `, ` +
+            mix(20, 8, depth) +
             `%, ` +
-            mix(18, 78, depth) +
+            mix(24, 80, depth) +
+            `%, var(--highlight-opacity))`};
+          --highlight-offset: calc(
+            calc(var(--trunk-width) * 0.9) -
+              calc(
+                calc(var(--trunk-width) * 1.8) *
+                  max(
+                    min(
+                      calc(
+                        calc(calc(var(--sun-offset) - var(--offset)) + 1) / 2
+                      ),
+                      1
+                    ),
+                    0
+                  )
+              )
+          );
+
+          background: ${`hsl(` +
+            mix(-20, 40, depth) +
+            `, ` +
+            mix(30, 15, depth) +
+            `%, ` +
+            mix(14, 80, depth) +
             `%)`};
-          box-shadow: inset calc(var(--trunk-width) / -3)
-            calc(var(--crown-height) / 2 + 8px) 8px
-            ${`hsla(310, ` +
-              mix(62, 35, depth) +
-              `%, ` +
-              mix(12, 35, depth) +
-              `%, ` +
-              (1 - easeOutQuad(depth)) +
-              `)`};
+          box-shadow: inset
+              calc(var(--highlight-offset) + calc(var(--trunk-width) * 0.25)) 0
+              calc(var(--trunk-width) * 0.4) calc(var(--trunk-width) * -0.1)
+              var(--highlight-color),
+            inset
+              calc(var(--highlight-offset) - calc(var(--trunk-width) * 0.25)) 0
+              calc(var(--trunk-width) * 0.4) calc(var(--trunk-width) * -0.1)
+              var(--highlight-color);
           position: absolute;
           display: block;
           width: var(--trunk-width);
@@ -137,7 +175,7 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
                 `, ` +
                 mix(90, 40, easeInQuad(depth)) +
                 `%, ` +
-                mix(10, 70, easeInSin(depth)) +
+                mix(10, 55, easeInSin(depth)) +
                 `%, ` +
                 (0.9 - easeInSin(depth)) +
                 `)`},
