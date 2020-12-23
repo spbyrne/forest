@@ -38,17 +38,33 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
       </div>
       <style jsx>{`
         .tree {
+          --trunk-height: ${trunkHeight};
+          --shadow-trunk-height: calc(
+            var(--trunk-height) * calc(1 - var(--depth))
+          );
+          --trunk-width: ${trunkWidth};
+          --crown-width: ${crownWidth};
+          --crown-height: ${crownHeight};
           --blur: ${blur};
           --offset: ${left};
           --depth: ${depth};
           --shadow-opacity: ${Math.round(
             Math.max(mix(1, -0.5, depth), 0) * 100
           ) / 100};
+
           transform: translate3d(0, 0, ${zIndex});
           filter: blur(var(--blur));
+          position: absolute;
+          transform-origin: 50% 100%;
+          top: var(--scene-horizon);
+          transform-style: preserve-3d;
+          left: calc(100% * var(--offset));
+          backface-visibility: hidden;
         }
 
         .trunk {
+          --clip-offset: calc(100% - 2px);
+
           background: ${`hsl(32, ` +
             mix(35, 10, depth) +
             `%, ` +
@@ -63,6 +79,21 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
               `%, ` +
               (1 - easeOutQuad(depth)) +
               `)`};
+          position: absolute;
+          display: block;
+          width: var(--trunk-width);
+          height: calc(var(--trunk-height) + calc(var(--crown-height) / 2));
+          clip-path: polygon(
+            15% 0%,
+            85% 0%,
+            100% var(--clip-offset),
+            50% 100%,
+            0% var(--clip-offset)
+          );
+          bottom: 0;
+          left: 0;
+          transform: translate3d(-50%, 0, -1px);
+          backface-visibility: hidden;
         }
 
         .crown {
@@ -99,59 +130,20 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
               mix(20, 65, easeInSin(depth)) +
               `%)`}
           );
-          box-shadow: inset var(--shadow-offset)
-              calc(var(--crown-height) / -4.5) calc(var(--crown-height) / 3) 0
-              ${`hsla(200, ` +
-                mix(90, 50, depth) +
+          box-shadow: inset var(--shadow-offset) calc(var(--crown-height) / -4)
+              calc(var(--crown-height) / 3) 0
+              ${`hsla(` +
+                mix(200, 170, depth) +
+                `, ` +
+                mix(90, 40, easeInQuad(depth)) +
                 `%, ` +
-                mix(10, 24, depth) +
+                mix(10, 80, easeInSin(depth)) +
                 `%, ` +
                 (0.9 - depth) +
                 `)`},
             inset calc(-1 * var(--shadow-offset)) calc(var(--crown-height) / 2)
               calc(var(--crown-height) / 3) calc(var(--crown-height) / -3)
               ${`hsla(50, 70%, 90%, ` + Math.max(depth - 0.4, 0.4) + `)`};
-        }
-      `}</style>
-      <style jsx>{`
-        .tree {
-          --trunk-height: ${trunkHeight};
-          --shadow-trunk-height: calc(
-            var(--trunk-height) * calc(1 - var(--depth))
-          );
-          --trunk-width: ${trunkWidth};
-          --crown-width: ${crownWidth};
-          --crown-height: ${crownHeight};
-
-          position: absolute;
-          transform-origin: 50% 100%;
-          top: var(--scene-horizon);
-          transform-style: preserve-3d;
-          left: calc(100% * var(--offset));
-          backface-visibility: hidden;
-        }
-
-        .trunk {
-          --clip-offset: calc(100% - 2px);
-
-          position: absolute;
-          display: block;
-          width: var(--trunk-width);
-          height: calc(var(--trunk-height) + calc(var(--crown-height) / 2));
-          clip-path: polygon(
-            15% 0%,
-            85% 0%,
-            100% var(--clip-offset),
-            50% 100%,
-            0% var(--clip-offset)
-          );
-          bottom: 0;
-          left: 0;
-          transform: translate3d(-50%, 0, -1px);
-          backface-visibility: hidden;
-        }
-
-        .crown {
           position: absolute;
           width: var(--crown-width);
           height: var(--crown-height);

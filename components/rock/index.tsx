@@ -1,11 +1,13 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { mix, easeOutQuad, easeOutExpo } from '@/util'
+import { mix, easeOutQuad, easeOutExpo, randBias } from '@/util'
 
 export const Rock = ({ depth, zIndex, left, blur }) => {
   const { rockWidth, rockHeight } = React.useMemo(() => {
-    const rockWidth = Math.round(mix(0.5, 2, Math.random()) * 100) / 100
-    const rockHeight = Math.round(mix(0.75, 1.25, Math.random()) * 100) / 100
+    const rockWidth =
+      Math.round(randBias({ min: 0.375, max: 2.5, bias: 1 }) * 100) / 100
+    const rockHeight =
+      Math.round(randBias({ min: 0.675, max: 1.75, bias: 1 }) * 100) / 100
 
     return { rockWidth, rockHeight }
   }, [])
@@ -71,18 +73,24 @@ export const Rock = ({ depth, zIndex, left, blur }) => {
           position: absolute;
           left: 0;
           bottom: 0;
-          background: var(--shadow-color);
+          background: radial-gradient(
+            farthest-corner at 50% 0%,
+            var(--shadow-color),
+            transparent
+          );
+          background-size: 100% 100%;
+          background-position: top center;
           transform-origin: 50% 0%;
           transform-style: preserve-3d;
           transform: translate3d(0%, 100%, 0) skew(var(--shadow-skew))
-            scale3d(1, calc(1.5 - calc(var(--depth) * 1.5)), 1);
+            scale3d(1, calc(2 - calc(var(--depth) * 2)), 1);
           display: block;
           width: 100%;
           height: 100%;
           border-radius: 0 0 500px 500px;
           opacity: ${1 - easeOutQuad(depth)};
-          mask-image: radial-gradient(
-            farthest-corner at 50% 0,
+          mask-image: linear-gradient(
+            to bottom,
             rgba(0, 0, 0, 1),
             rgba(0, 0, 0, 0.6),
             rgba(0, 0, 0, 0.1),

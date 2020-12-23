@@ -16,6 +16,7 @@ export const Scene = ({
           --scene-horizon: 33%;
           --sun-offset: ${sunOffset};
 
+          pointer-events: auto;
           transform-style: preserve-3d;
           position: absolute;
           left: 50%;

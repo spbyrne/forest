@@ -6,6 +6,7 @@ export const Camera = ({ children }) => {
       <div className="camera">{children}</div>
       <style jsx>{`
         .camera {
+          pointer-events: none;
           display: block;
           position: absolute;
           perspective: 500px;
