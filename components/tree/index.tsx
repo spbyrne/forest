@@ -164,7 +164,7 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
         .shadow {
           --shadow-trunk-height: calc(var(--trunk-height) / 2);
           --shadow-color: ${`hsla(` +
-            mix(200, 140, easeOutQuad(depth)) +
+            mix(200, 180, easeOutQuad(depth)) +
             `, ` +
             mix(75, 30, easeOutQuad(depth)) +
             `%, ` +
