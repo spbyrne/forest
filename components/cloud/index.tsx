@@ -100,6 +100,7 @@ export const Cloud = ({}) => {
           display: block;
           width: 300px;
           height: 300px;
+          filter: blur(10px);
         }
 
         .puff {
