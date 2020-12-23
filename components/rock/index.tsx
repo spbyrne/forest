@@ -61,11 +61,11 @@ export const Rock = ({ depth, zIndex, left, blur }) => {
               )
           );
           --shadow-color: ${`hsla(` +
-            mix(200, 140, easeOutQuad(depth)) +
+            mix(200, 180, easeOutQuad(depth)) +
             `, ` +
             mix(75, 30, easeOutQuad(depth)) +
             `%, ` +
-            mix(10, 45, easeOutQuad(depth)) +
+            mix(8, 40, easeOutQuad(depth)) +
             `%, 1)`};
 
           position: absolute;
@@ -75,7 +75,7 @@ export const Rock = ({ depth, zIndex, left, blur }) => {
           transform-origin: 50% 0%;
           transform-style: preserve-3d;
           transform: translate3d(0%, 100%, 0) skew(var(--shadow-skew))
-            scale3d(1, calc(1 - var(--depth)), 1);
+            scale3d(1, calc(1.5 - calc(var(--depth) * 1.5)), 1);
           display: block;
           width: 100%;
           height: 100%;
