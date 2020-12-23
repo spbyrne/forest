@@ -59,6 +59,22 @@ export const Tree = ({ depth, zIndex, left }) => {
         }
 
         .crown {
+          --shadow-offset: calc(
+            calc(var(--crown-height) / -3) +
+              calc(
+                calc(var(--crown-height) / 1.5) *
+                  max(
+                    min(
+                      calc(
+                        calc(calc(var(--sun-offset) - var(--offset)) + 1) / 2
+                      ),
+                      1
+                    ),
+                    0
+                  )
+              )
+          );
+
           background: linear-gradient(
             to bottom,
             ${`hsl(` +
@@ -69,22 +85,25 @@ export const Tree = ({ depth, zIndex, left }) => {
               mix(15, 88, easeInSin(depth)) +
               `%)`},
             ${`hsl(` +
-              mix(200, 130, depth) +
+              mix(180, 120, depth) +
               `, ` +
               mix(65, 20, depth) +
               `%, ` +
-              mix(15, 65, easeInSin(depth)) +
+              mix(20, 65, easeInSin(depth)) +
               `%)`}
           );
-          box-shadow: inset 0 -4rem 3rem -2rem
-              ${`hsla(176, ` +
-                mix(88, 50, depth) +
+          box-shadow: inset var(--shadow-offset)
+              calc(var(--crown-height) / -4.5) calc(var(--crown-height) / 3) 0
+              ${`hsla(200, ` +
+                mix(90, 50, depth) +
                 `%, ` +
-                mix(5, 24, depth) +
+                mix(10, 24, depth) +
                 `%, ` +
-                (1 - easeOutQuad(depth)) +
+                (0.9 - depth) +
                 `)`},
-            inset 0 2rem 3rem -1rem ${`hsla(58, 60%, 93%, ` + Math.max(depth - 0.3, 0.3) + `)`};
+            inset calc(-1 * var(--shadow-offset)) calc(var(--crown-height) / 2)
+              calc(var(--crown-height) / 3) calc(var(--crown-height) / -3)
+              ${`hsla(50, 70%, 90%, ` + Math.max(depth - 0.4, 0.4) + `)`};
         }
       `}</style>
       <style jsx>{`
