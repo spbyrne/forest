@@ -116,10 +116,10 @@ export const Cloud = ({}) => {
             ),
             linear-gradient(
               to top,
-              hsla(210, 60%, 40%, 0) 30%,
-              hsla(210, 70%, 88%, 0.8) 50%,
-              hsla(210, 70%, 88%, 0.7) 70%,
-              hsla(58, 90%, 97%, 0.3) 100%
+              hsla(210, 60%, 70%, 0) 30%,
+              hsla(210, 65%, 82%, 0.5) 50%,
+              hsla(90, 70%, 87%, 0.7) 75%,
+              hsla(58, 90%, 97%, 0) 100%
             );
           background-size: 300% 100%;
           background-position: center top;
@@ -129,7 +129,7 @@ export const Cloud = ({}) => {
 
         .puff--center {
           transform: scale3d(${puffOneWidth}, ${puffOneHeight}, 1)
-            skew(var(--cloud-skew)) translate3d(-50%, -70%, 0);
+            translate3d(-50%, -70%, 0) skew(var(--cloud-skew));
           background: radial-gradient(
               farthest-side at 50% 15%,
               hsla(58, 90%, 97%, 0.9),
@@ -137,10 +137,10 @@ export const Cloud = ({}) => {
             ),
             linear-gradient(
               to top,
-              hsla(210, 60%, 40%, 0) 30%,
-              hsla(210, 70%, 88%, 0.8) 40%,
-              hsla(210, 70%, 88%, 0.7) 50%,
-              hsla(58, 90%, 97%, 0.3) 100%
+              hsla(210, 60%, 70%, 0) 30%,
+              hsla(210, 65%, 82%, 0.5) 50%,
+              hsla(90, 70%, 87%, 0.7) 65%,
+              hsla(58, 90%, 97%, 0) 100%
             );
           background-size: 300% 100%;
           background-position: center top;
@@ -148,7 +148,7 @@ export const Cloud = ({}) => {
 
         .puff--left {
           transform: scale3d(${puffTwoWidth}, ${puffTwoHeight}, 1)
-            skew(var(--cloud-skew)) translate3d(calc(-50% - 150px), -70%, 0);
+            translate3d(calc(-50% - 150px), -70%, 0) skew(var(--cloud-skew));
           mask-image: linear-gradient(
             to right,
             hsla(0, 0, 0, 1) 60%,
@@ -158,7 +158,7 @@ export const Cloud = ({}) => {
 
         .puff--right {
           transform: scale3d(${puffThreeWidth}, ${puffThreeHeight}, 1)
-            skew(var(--cloud-skew)) translate3d(calc(-50% + 150px), -70%, 0);
+            translate3d(calc(-50% + 150px), -70%, 0) skew(var(--cloud-skew));
           mask-image: linear-gradient(
             to left,
             hsla(0, 0, 0, 1) 60%,

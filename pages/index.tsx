@@ -14,6 +14,9 @@ function Index(props) {
           <Cloud />
           <Cloud />
           <Cloud />
+          <Cloud />
+          <Cloud />
+          <Cloud />
           <Sun />
           <Fog />
           <Forest />

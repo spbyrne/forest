@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { mix, easeOutQuad, easeInSin, easeInQuad } from '@/util'
+import { mix, easeOutQuad, easeInSin, easeInQuad, randBias } from '@/util'
 
 export const Tree = ({ depth, zIndex, left }) => {
   const {
@@ -9,10 +9,14 @@ export const Tree = ({ depth, zIndex, left }) => {
     crownHeight,
     crownWidth,
   } = React.useMemo(() => {
-    const trunkHeight = Math.round(mix(8, 48, Math.random())) + `px`
-    const trunkWidth = Math.round(mix(8, 24, Math.random())) + `px`
-    const crownHeight = Math.round(mix(48, 140, Math.random())) + `px`
-    const crownWidth = Math.round(mix(32, 120, Math.random())) + `px`
+    const trunkHeight =
+      randBias({ min: 8, max: 78, bias: 50, wholeNumber: true }) + `px`
+    const trunkWidth =
+      randBias({ min: 8, max: 24, bias: 18, wholeNumber: true }) + `px`
+    const crownHeight =
+      randBias({ min: 40, max: 180, bias: 100, wholeNumber: true }) + `px`
+    const crownWidth =
+      randBias({ min: 32, max: 120, bias: 80, wholeNumber: true }) + `px`
 
     return { trunkHeight, trunkWidth, crownHeight, crownWidth }
   }, [])
@@ -38,12 +42,20 @@ export const Tree = ({ depth, zIndex, left }) => {
         }
 
         .trunk {
-          background: ${`hsl(22, ` +
-            mix(45, 10, depth) +
+          background: ${`hsl(32, ` +
+            mix(35, 10, depth) +
             `%, ` +
             mix(18, 78, depth) +
             `%)`};
-          box-shadow: inset -8px calc(var(--crown-height) / 2 + 8px) 8px ${`hsla(310, ` + mix(62, 35, depth) + `%, ` + mix(12, 35, depth) + `%, ` + (1 - easeOutQuad(depth)) + `)`};
+          box-shadow: inset calc(var(--trunk-width) / -3)
+            calc(var(--crown-height) / 2 + 8px) 8px
+            ${`hsla(310, ` +
+              mix(62, 35, depth) +
+              `%, ` +
+              mix(12, 35, depth) +
+              `%, ` +
+              (1 - easeOutQuad(depth)) +
+              `)`};
         }
 
         .crown {
