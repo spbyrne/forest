@@ -192,7 +192,7 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
           mask-image: radial-gradient(
             farthest-corner at 50% 0,
             rgba(0, 0, 0, 1),
-            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.6),
             rgba(0, 0, 0, 0)
           );
         }
@@ -211,7 +211,12 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
           left: 50%;
           transform: translate3d(-50%, 0, 0px);
           backface-visibility: hidden;
-          background: var(--shadow-color);
+          background: radial-gradient(
+            farthest-corner at 50% 0%,
+            var(--shadow-color),
+            transparent
+          );
+          background-size: 100% 100%;
         }
 
         .shadowCrown {
@@ -224,7 +229,12 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
           height: var(--crown-height);
           border-radius: 100%;
           transform: translate3d(-50%, 0, 0);
-          background: var(--shadow-color);
+          background: radial-gradient(
+            farthest-corner at 50% 30%,
+            var(--shadow-color),
+            transparent
+          );
+          background-size: 100% 100%;
         }
       `}</style>
     </>
