@@ -1,6 +1,14 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { mix, easeOutQuad, easeInSin, easeInQuad, randBias } from '@/util'
+import {
+  mix,
+  easeOutQuad,
+  easeInSin,
+  easeInQuad,
+  randBias,
+  easeOutExpo,
+  easeInExpo,
+} from '@/util'
 
 export const Tree = ({ depth, zIndex, left, blur }) => {
   const {
@@ -8,6 +16,7 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
     trunkWidth,
     crownHeight,
     crownWidth,
+    skew,
   } = React.useMemo(() => {
     const trunkHeight =
       randBias({
@@ -22,8 +31,15 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
       randBias({ min: 40, max: 180, bias: 100, wholeNumber: true }) + `px`
     const crownWidth =
       randBias({ min: 32, max: 120, bias: 80, wholeNumber: true }) + `px`
+    const skew =
+      Math.round(
+        randBias({ min: -10, max: 10, bias: 0, easingFunction: easeInExpo }) *
+          100
+      ) /
+        100 +
+      `deg`
 
-    return { trunkHeight, trunkWidth, crownHeight, crownWidth }
+    return { trunkHeight, trunkWidth, crownHeight, crownWidth, skew }
   }, [])
 
   return (
@@ -51,8 +67,9 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
           --shadow-opacity: ${Math.round(
             Math.max(mix(1, -0.5, depth), 0) * 100
           ) / 100};
+          --skew: ${skew};
 
-          transform: translate3d(0, 0, ${zIndex});
+          transform: translate3d(0, 0, ${zIndex}) skew(var(--skew));
           filter: blur(var(--blur));
           position: absolute;
           transform-origin: 50% 100%;
@@ -156,16 +173,16 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
             ${`hsl(` +
               mix(130, 60, depth) +
               `, ` +
-              mix(90, 20, depth) +
+              mix(90, 10, depth) +
               `%, ` +
-              mix(15, 88, easeInSin(depth)) +
+              mix(15, 92, easeInSin(depth)) +
               `%)`},
             ${`hsl(` +
               mix(180, 120, depth) +
               `, ` +
-              mix(65, 20, depth) +
+              mix(65, 10, depth) +
               `%, ` +
-              mix(20, 65, easeInSin(depth)) +
+              mix(20, 80, easeInSin(depth)) +
               `%)`}
           );
           box-shadow: inset var(--shadow-offset)

@@ -17,8 +17,8 @@ export const Ground = ({}) => {
           backface-visibility: hidden;
           background: linear-gradient(
             to bottom,
-            hsla(186, 20%, 86%,0.5) ,
-            hsl(166, 15%, 75%) 3%,
+            hsla(186, 20%, 86%,0) ,
+            hsl(166, 15%, 80%) 2%,
             hsl(133, 23%, 48%) 25%,
             hsl(150, 47%, 27%) 50%,
             hsl(197, 70%, 18%) 80%,

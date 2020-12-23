@@ -7,6 +7,9 @@ import {
   easeInSin,
   randBias,
   easeOutExpo,
+  easeInExpo,
+  easeInQuad,
+  easeInCubic,
 } from '@/util'
 import { Tree, Rock } from 'components'
 
@@ -63,7 +66,7 @@ const generateObject = ({ objectOptions }) => {
   const left = mix(-0.4, 1.4, Math.random())
   const zIndex = Math.round(mix(-200, 520, offsetTop) * 1000) / 1000 + 'px'
   const depth = Math.round((1 - offsetTop) * 100) / 100
-  const blur = mix(3, 0, easeOutQuad(depth)) + 'px'
+  const blur = Math.round(mix(0, 4, easeInCubic(1 - depth)) * 100) / 100 + 'px'
   const Component = randomFromArray(objectOptions)
 
   return {

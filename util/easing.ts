@@ -17,6 +17,8 @@ export const easeOutExpo = x => (x === 1 ? 1 : 1 - Math.pow(2, -10 * x))
 
 export const easeInExpo = x => (x === 0 ? 0 : Math.pow(2, 10 * x - 10))
 
+export const easeInCubic = x => x * x * x
+
 export const randBias = ({
   min,
   max,
