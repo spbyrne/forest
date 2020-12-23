@@ -25,6 +25,7 @@ export const Sun = ({ left = 0.3 }) => {
           transform: translate3d(-50%,-50%,-1000px) scale3d(2,2,1);
           background: radial-gradient(circle, hsl(50,100%,95%),hsl(50,100%,90%));
           opacity: 1;
+          filter: blur(3px);
           border-radius: 100%;
           backface-visibility: hidden;
         }
