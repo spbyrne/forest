@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as _ from 'underscore'
 import { mix, easeOutQuad, easeInSin, easeInQuad, randBias } from '@/util'
 
-export const Tree = ({ depth, zIndex, left }) => {
+export const Tree = ({ depth, zIndex, left, blur }) => {
   const {
     trunkHeight,
     trunkWidth,
@@ -10,7 +10,12 @@ export const Tree = ({ depth, zIndex, left }) => {
     crownWidth,
   } = React.useMemo(() => {
     const trunkHeight =
-      randBias({ min: 8, max: 78, bias: 50, wholeNumber: true }) + `px`
+      randBias({
+        min: 8,
+        max: 90,
+        bias: randBias({ min: 10, max: 80, bias: 60, wholeNumber: true }),
+        wholeNumber: true,
+      }) + `px`
     const trunkWidth =
       randBias({ min: 8, max: 24, bias: 18, wholeNumber: true }) + `px`
     const crownHeight =
@@ -33,12 +38,14 @@ export const Tree = ({ depth, zIndex, left }) => {
       </div>
       <style jsx>{`
         .tree {
+          --blur: ${blur};
           --offset: ${left};
           --depth: ${depth};
           --shadow-opacity: ${Math.round(
             Math.max(mix(1, -0.5, depth), 0) * 100
           ) / 100};
           transform: translate3d(0, 0, ${zIndex});
+          filter: blur(var(--blur));
         }
 
         .trunk {

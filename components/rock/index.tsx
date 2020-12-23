@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as _ from 'underscore'
 import { mix, easeOutQuad, easeOutExpo } from '@/util'
 
-export const Rock = ({ depth, zIndex, left }) => {
+export const Rock = ({ depth, zIndex, left, blur }) => {
   const { rockWidth, rockHeight } = React.useMemo(() => {
     const rockWidth = Math.round(mix(0.5, 2, Math.random()) * 100) / 100
     const rockHeight = Math.round(mix(0.75, 1.25, Math.random()) * 100) / 100
@@ -17,6 +17,7 @@ export const Rock = ({ depth, zIndex, left }) => {
       </div>
       <style jsx>{`
         .rock {
+          --blur: ${blur};
           --depth: ${depth};
           --offset: ${left};
           --shadow-opacity: ${Math.round(Math.max(mix(1, -1, depth), 0) * 100) /
@@ -32,6 +33,7 @@ export const Rock = ({ depth, zIndex, left }) => {
           display: block;
           width: 50px;
           height: 25px;
+          filter: blur(var(--blur));
           border-radius: 500px 500px 0 0;
           background: ${`hsl(22, ` +
             mix(4, 12, depth) +
