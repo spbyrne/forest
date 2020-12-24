@@ -82,9 +82,9 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
         .trunk {
           --clip-offset: calc(100% - 2px);
           --highlight-opacity: calc(
-            0.3 +
+            0.5 +
               calc(
-                0.7 *
+                0.5 *
                   max(
                     min(
                       calc(
@@ -97,7 +97,7 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
               )
           );
           --highlight-color: ${`hsla(` +
-            mix(40, 90, depth) +
+            mix(10, 90, depth) +
             `, ` +
             mix(20, 8, depth) +
             `%, ` +

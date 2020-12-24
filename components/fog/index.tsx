@@ -2,7 +2,7 @@ import * as React from 'react'
 import { easeInQuad, mix } from '@/util'
 
 export const Fog = ({
-  density = Math.round(mix(0, 0.3, Math.random()) * 100) / 100,
+  density = Math.round(mix(0.1, 0.3, Math.random()) * 100) / 100,
 }) => {
   return (
     <>
@@ -28,12 +28,12 @@ export const Fog = ({
           backface-visibility: hidden;
           background: linear-gradient(
             to bottom,
-            hsla(120, 20%, 86%,0),
-            hsla(180, 20%, 86%,calc(var(--fog-density) * 0.3)) 20%,
-            hsla(50, 20%, 86%,calc(var(--fog-density) * 0.7)) 60%,
-            hsla(50, 20%, 86%,calc(var(--fog-density) * 0.9)) 82%,
-            hsla(80, 20%, 86%,calc(var(--fog-density) * 0.7)) 92%,
-            hsla(120, 20%, 86%,0)
+            hsla(120, 8%, 80%,0),
+            hsla(180, 8%, 80%,calc(var(--fog-density) * 0.3)) 20%,
+            hsla(50, 8%, 80%,calc(var(--fog-density) * 0.7)) 60%,
+            hsla(50, 8%, 80%,calc(var(--fog-density) * 0.9)) 82%,
+            hsla(80, 8%, 80%,calc(var(--fog-density) * 0.7)) 92%,
+            hsla(120, 8%, 80%,0)
           );
         }
         
