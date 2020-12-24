@@ -38,7 +38,7 @@ export const Rock = ({ depth, zIndex, left, blur }) => {
           filter: blur(var(--blur));
           border-radius: 500px 500px 0 0;
           background: ${`hsl(22, ` +
-            mix(4, 12, depth) +
+            mix(4, 10, depth) +
             `%, ` +
             mix(14, 73, easeOutQuad(depth)) +
             `%)`};

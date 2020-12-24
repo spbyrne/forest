@@ -21,9 +21,10 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
     const trunkHeight =
       randBias({
         min: 8,
-        max: 110,
+        max: 160,
         bias: randBias({ min: 10, max: 80, bias: 60, wholeNumber: true }),
         wholeNumber: true,
+        easingFunction: easeInExpo,
       }) + `px`
     const trunkWidth =
       randBias({ min: 8, max: 24, bias: 18, wholeNumber: true }) + `px`
@@ -81,27 +82,13 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
 
         .trunk {
           --clip-offset: calc(100% - 2px);
-          --highlight-opacity: calc(
-            0.5 +
-              calc(
-                0.5 *
-                  max(
-                    min(
-                      calc(
-                        calc(calc(var(--sun-offset) - var(--offset)) + 1) / 2
-                      ),
-                      1
-                    ),
-                    0
-                  )
-              )
-          );
+          --highlight-opacity: 0.5;
           --highlight-color: ${`hsla(` +
             mix(10, 90, depth) +
             `, ` +
             mix(20, 8, depth) +
             `%, ` +
-            mix(24, 80, depth) +
+            mix(35, 80, depth) +
             `%, var(--highlight-opacity))`};
           --highlight-offset: calc(
             calc(var(--trunk-width) * 0.9) -
@@ -217,11 +204,11 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
         .shadow {
           --shadow-trunk-height: calc(var(--trunk-height) / 2);
           --shadow-color: ${`hsla(` +
-            mix(200, 180, easeOutQuad(depth)) +
+            mix(230, 180, easeOutQuad(depth)) +
             `, ` +
             mix(75, 30, easeOutQuad(depth)) +
             `%, ` +
-            mix(8, 40, easeOutQuad(depth)) +
+            mix(6, 40, easeOutQuad(depth)) +
             `%, 1)`};
           --shadow-skew: calc(
             85deg -
@@ -249,7 +236,7 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
           transform: scale3d(1, calc(1 - var(--depth)), 1)
             skew(var(--shadow-skew)) translate3d(-50%, 100%, -1px);
           z-index: -2;
-          opacity: ${1 - depth};
+          opacity: ${0.8 - depth * 0.7};
           mask-image: radial-gradient(
             farthest-corner at 50% 0,
             rgba(0, 0, 0, 1),
