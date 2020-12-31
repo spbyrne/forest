@@ -1,4 +1,4 @@
-## CSS Forest Landscapes
+## Randomized CSS Forest Landscapes
 
 Just a fun experiment with CSS. Seemingly only works in Firefox right now.
 
