@@ -1,16 +1,6 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import {
-  mix,
-  easeOutQuad,
-  randomFromArray,
-  easeInSin,
-  randBias,
-  easeOutExpo,
-  easeInExpo,
-  easeInQuad,
-  easeInCubic,
-} from '@/util'
+import { mix, randomFromArray, randBias } from '@/util'
 import { Tree, Rock } from 'components'
 
 export const Forest = () => {
@@ -62,20 +52,15 @@ export const Forest = () => {
 }
 
 const generateObject = ({ objectOptions }) => {
-  const offsetTop = randBias({ min: 0, max: 1, bias: Math.random() })
-  const left = mix(-0.4, 1.4, Math.random())
-  const zIndex = Math.round(mix(-200, 520, offsetTop) * 1000) / 1000 + 'px'
-  const depth = Math.round((1 - offsetTop) * 100) / 100
-  const blur = Math.round(mix(0, 4, easeInCubic(1 - depth)) * 100) / 100 + 'px'
-  const Component = randomFromArray(objectOptions)
+  let top = randBias({ min: 0, max: 1, bias: Math.random() })
+  let left = mix(-0.4, 1.4, Math.random())
+  let Component = randomFromArray(objectOptions)
 
   return {
     Component: Component,
     props: {
       left: left,
-      zIndex: zIndex,
-      depth: depth,
-      blur: blur,
+      top: top,
     },
   }
 }

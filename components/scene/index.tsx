@@ -8,7 +8,7 @@ export const Scene = ({
 }) => {
   return (
     <>
-      <div className="scene animated-scene">{children}</div>
+      <div className="scene">{children}</div>
       <style>{`
       
         .scene {
@@ -20,6 +20,7 @@ export const Scene = ({
           transform-style: preserve-3d;
           position: absolute;
           left: 50%;
+          top: 0;
           display: block;
           width: 100%;
           height: 100%;
@@ -28,7 +29,7 @@ export const Scene = ({
           backface-visibility: hidden;
         }
 
-        @keyframes animatedScene- {
+        @keyframes animatedScene {
           0% {
             transform: translate3d(-50%,50px,200px);
           }

@@ -1,15 +1,19 @@
 import * as React from 'react'
 import * as _ from 'underscore'
-import { mix, easeOutQuad, easeOutExpo, randBias } from '@/util'
+import { mix, easeOutQuad, easeOutExpo, randBias, easeInCubic } from '@/util'
 
-export const Rock = ({ depth, zIndex, left, blur }) => {
-  const { rockWidth, rockHeight } = React.useMemo(() => {
+export const Rock = ({ left, top }) => {
+  const { rockWidth, rockHeight, zIndex, depth, blur } = React.useMemo(() => {
     const rockWidth =
       Math.round(randBias({ min: 0.375, max: 2.5, bias: 1 }) * 100) / 100
     const rockHeight =
       Math.round(randBias({ min: 0.675, max: 1.75, bias: 1 }) * 100) / 100
+    const zIndex = Math.round(mix(-200, 520, top) * 1000) / 1000 + 'px'
+    const depth = Math.round((1 - top) * 100) / 100
+    const blur =
+      Math.round(mix(0, 4, easeInCubic(1 - depth)) * 100) / 100 + 'px'
 
-    return { rockWidth, rockHeight }
+    return { rockWidth, rockHeight, zIndex, depth, blur }
   }, [])
 
   return (

@@ -11,7 +11,6 @@ export const Camera = ({ children }) => {
           position: absolute;
           perspective: 500px;
           perspective-origin: 50% 33%;
-          transform-style: preserve-3d;
           width: 100%;
           height: 100%;
           top: 0;

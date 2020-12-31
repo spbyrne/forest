@@ -8,15 +8,19 @@ import {
   randBias,
   easeOutExpo,
   easeInExpo,
+  easeInCubic,
 } from '@/util'
 
-export const Tree = ({ depth, zIndex, left, blur }) => {
+export const Tree = ({ left, top }) => {
   const {
     trunkHeight,
     trunkWidth,
     crownHeight,
     crownWidth,
     skew,
+    zIndex,
+    depth,
+    blur,
   } = React.useMemo(() => {
     const trunkHeight =
       randBias({
@@ -39,8 +43,21 @@ export const Tree = ({ depth, zIndex, left, blur }) => {
       ) /
         100 +
       `deg`
+    const zIndex = Math.round(mix(-200, 520, top) * 1000) / 1000 + 'px'
+    const depth = Math.round((1 - top) * 100) / 100
+    const blur =
+      Math.round(mix(0, 4, easeInCubic(1 - depth)) * 100) / 100 + 'px'
 
-    return { trunkHeight, trunkWidth, crownHeight, crownWidth, skew }
+    return {
+      trunkHeight,
+      trunkWidth,
+      crownHeight,
+      crownWidth,
+      skew,
+      zIndex,
+      depth,
+      blur,
+    }
   }, [])
 
   return (
