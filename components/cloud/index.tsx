@@ -113,7 +113,7 @@ export const Cloud = ({}) => {
           background: radial-gradient(
               farthest-side at 50% 15%,
               hsla(58, 90%, 97%, 0.8),
-              transparent 50%
+              rgba(255, 255, 255, 0) 50%
             ),
             linear-gradient(
               to top,
@@ -134,7 +134,7 @@ export const Cloud = ({}) => {
           background: radial-gradient(
               farthest-side at 50% 15%,
               hsla(58, 90%, 97%, 0.9),
-              transparent 50%
+              rgba(255, 255, 255, 0) 50%
             ),
             linear-gradient(
               to top,

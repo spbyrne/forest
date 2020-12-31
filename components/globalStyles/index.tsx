@@ -33,6 +33,9 @@ export const GlobalStyles = () => {
           box-sizing: inherit;
           border-width: 0;
           border-style: solid;
+          overflow: visible;
+          transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
         }
 
         body {

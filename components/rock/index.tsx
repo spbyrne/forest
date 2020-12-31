@@ -80,7 +80,7 @@ export const Rock = ({ left, top }) => {
           background: radial-gradient(
             farthest-corner at 50% 0%,
             var(--shadow-color),
-            transparent
+            rgba(255, 255, 255, 0)
           );
           background-size: 100% 100%;
           background-position: top center;
